@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <style type="text/css">.gm-style .gm-style-cc span, .gm-style .gm-style-cc a, .gm-style .gm-style-mtc div {
+        font-size: 10px
+    }</style>
+    <style type="text/css">@media print {
+        .gm-style .gmnoprint, .gmnoprint {
+            display: none
+        }
+    }
+
+    @media screen {
+        .gm-style .gmnoscreen, .gmnoscreen {
+            display: none
+        }
+    }</style>
+    <style type="text/css">.gm-style-pbc {
+        transition: opacity ease-in-out;
+        background-color: rgba(0, 0, 0, 0.45);
+        text-align: center
+    }
+
+    .gm-style-pbt {
+        font-size: 22px;
+        color: white;
+        font-family: Roboto, Arial, sans-serif;
+        position: relative;
+        margin: 0;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%)
+    }</style>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="icon" type="image/png" href="/assets/img/favicon.ico">
+
+    <title>Creative Tim | Tools to build better websites</title>
+
+    <!-- Canonical SEO -->
+    <link rel="canonical" href="http://www.creative-tim.com">
+
+    <meta content="The most beautiful freebies, kits and website templates built for the bootstrap framework. A place for designers and developers."
+          name="description">
+    <meta content="creativetim, creative tim, bootstrap, theme, freebies, bootstrap kit, bootstrap template, free items, beautiful ui, awesome freebies,  css cards,  bootstrap wizard,  bootstrap plugin"
+          name="keywords">
+    <meta content="Creative Tim - Tools to build better websites" property="og:title">
+    <meta content="http://www.creative-tim.com/" property="og:url">
+    <meta content="https://s3.amazonaws.com/creativetim_bucket/mailchimp_tim_white_bg.jpg" property="og:image">
+    <meta content="The most beautiful  freebies, kits and website templates built for the bootstrap framework. A place for designers and developers."
+          property="og:description">
+    <meta content="summary" property="twitter:card">
+    <meta content="http://www.creative-tim.com/" property="twitter:url">
+    <meta content="Creative Tim - Tools to build better websites" property="twitter:title">
+    <meta content="The most beautiful  freebies, kits and website templates built for the bootstrap framework. A place for designers and developers."
+          property="twitter:description">
+    <meta content="https://s3.amazonaws.com/creativetim_bucket/mailchimp_tim_white_bg.jpg" property="twitter:image">
+    <meta content="/" property="twitter:domain">
+    <meta content="@CreativeTim" property="twitter:site">
+    <meta content="@CreativeTim" property="twitter:creator">
+
+    <link href="/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="/assets/css/rubick_pres.css" rel="stylesheet">
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700" rel="stylesheet" type="text/css">
+    <link href="/assets/css/fonts/pe-icon-7-stroke.css" rel="stylesheet">
+    <link href="/assets/css/fonts/Rubik-Fonts.css" rel="stylesheet">
+
+    <style>
+        .section-header .separator {
+            margin: 0em auto 2em;
+        }
+
+        .space-50 {
+            height: 50px;
+            width: 100%;
+            display: block;
+            content: "";
+        }
+
+        .section .parallax > img {
+            width: 100%;
+            min-width: 0;
+            min-height: 0;
+        }
+
+        .pattern-image:after {
+            opacity: .2;
+            /*                 background: #111; */
+        }
+
+        .section-header h1 {
+            text-shadow: -2px 2px 30px rgba(0, 0, 0, 0.25), -2px 4px 14px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header h5 {
+            text-shadow: 0px 0px 11px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-header .content {
+            top: 42%;
+        }
+
+        .section-we-are-1 .title {
+            max-width: 960px;
+        }
+
+        .card .icon ~ h3 {
+            margin-bottom: 10px;
+        }
+
+        .section-with-hover .project .content {
+            text-align: center;
+        }
+
+        .section-with-hover .project .over-area {
+            background: rgba(0, 0, 0, .83);
+        }
+
+        .section-clients-2 {
+            padding: 6em 0 1em;
+        }
+
+        .section-clients-2 .nav-text li {
+            margin: 0 15px 10px 15px;
+        }
+
+        .section-contact-3 .contact-container .address-container {
+            width: 28%;
+            background-color: #FFFFFF;
+            height: 470px;
+            top: 50px;
+            padding: 20px;
+        }
+
+        .section-contact-3 .address {
+            margin-top: 40px;
+        }
+
+        .section-we-made-3 .content {
+            padding: 0 15px;
+            text-align: center;
+        }
+
+        .section-we-made-3 .over-area .content h3 {
+            margin: 5px 0 20px;
+        }
+
+        .section-we-made-3 .over-area .content p {
+            font-size: .9em;
+            color: #898989;
+        }
+
+        .section-we-made-3 .over-area .content h5 {
+            margin-bottom: 0px;
+            margin-top: 20px;
+        }
+
+        .btn-black {
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+
+        .copyright a {
+            color: #FFFFFF;
+        }
+
+        .section-team-2 .team .member p {
+            font-size: .9em;
+            padding: 0 10px;
+        }
+
+        .card {
+            margin-bottom: 30px;
+        }
+
+        .section-with-hover .project .over-area.over-area-sm .content p {
+            font-size: .85em;
+        }
+
+        .section-with-hover .project .over-area.over-area-sm .content h4 {
+            font-size: 1.6em;
+        }
+
+        .logo {
+            display: block;
+            margin: 0 auto 10px;
+            width: 61px;
+            height: 61px;
+            border-radius: 50%;
+            border: 1px solid #333333;
+            overflow: hidden;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .loading .loading-container p {
+            font-size: 30px;
+            width: 220px;
+            margin: 0 auto;
+            margin-bottom: 30px;
+            height: 35px;
+        }
+
+        .loading .logo {
+            opacity: 0;
+            transition: all 0.9s;
+            -webkit-transition: all 0.9s;
+            -moz-transition: all 0.9s;
+        }
+
+        .loading .logo.visible {
+            opacity: 1;
+        }
+
+        .sharrre.btn {
+            color: #444444;
+            border-color: #444444;
+            font-weight: 400;
+        }
+
+        .address .col-md-6 {
+            padding-right: 7px;
+            padding-left: 7px;
+        }
+
+        a.img-class {
+            opacity: 1;
+        }
+
+        a.img-class:hover {
+            opacity: .9;
+        }
+
+        .btn-lg {
+            padding: 14px 10px;
+        }
+
+        @media (max-width: 1200px) {
+            .section-contact-3 .contact-container .address-container {
+                height: 520px;
+            }
+        }
+    </style>
+    <script type="text/javascript" charset="UTF-8"
+            src="https://maps.googleapis.com/maps-api-v3/api/js/29/13/intl/zh_cn/common.js" style=""></script>
+    <script type="text/javascript" charset="UTF-8"
+            src="https://maps.googleapis.com/maps-api-v3/api/js/29/13/intl/zh_cn/map.js"></script>
+    <script type="text/javascript" charset="UTF-8"
+            src="https://maps.googleapis.com/maps-api-v3/api/js/29/13/intl/zh_cn/util.js"></script>
+    <script type="text/javascript" charset="UTF-8"
+            src="https://maps.googleapis.com/maps-api-v3/api/js/29/13/intl/zh_cn/marker.js"></script>
+    <style type="text/css">.gm-style {
+        font: 400 11px Roboto, Arial, sans-serif;
+        text-decoration: none;
+    }
+
+    .gm-style img {
+        max-width: none;
+    }</style>
+    <script type="text/javascript" charset="UTF-8"
+            src="https://maps.googleapis.com/maps-api-v3/api/js/29/13/intl/zh_cn/onion.js"></script>
+    <script type="text/javascript" charset="UTF-8"
+            src="https://maps.googleapis.com/maps-api-v3/api/js/29/13/intl/zh_cn/controls.js"></script>
+    <script type="text/javascript" charset="UTF-8"
+            src="https://maps.googleapis.com/maps-api-v3/api/js/29/13/intl/zh_cn/stats.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top navbar-burger navbar-transparent" role="navigation">
+    <!-- if you want to keep the navbar hidden you can add this class to the navbar "navbar-burger"-->
+    <div class="container">
+        <div class="navbar-header">
+            <button id="menu-toggle" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar bar1"></span>
+                <span class="icon-bar bar2"></span>
+                <span class="icon-bar bar3"></span>
+            </button>
+            <a target="_blank" href="http://www.creative-tim.com?ref=presentation-page" class="navbar-brand">
+                Creative Tim
+            </a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right navbar-uppercase">
+                <li class="social-links">
+                    <a href="https://www.facebook.com/CreativeTim">
+                        <i class="fa fa-facebook-square"></i>
+                    </a>
+                    <a href="https://twitter.com/CreativeTim">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a href="https://plus.google.com/+CreativetimPage">
+                        <i class="fa fa-google-plus-square"></i>
+                    </a>
+                    <a href="https://dribbble.com/creativetim">
+                        <i class="fa fa-dribbble"></i>
+                    </a>
+
+                </li>
+                <li>
+                    <a href="" data-scroll="true" data-id="#whoWeAre">
+                        About
+                    </a>
+                </li>
+                <li>
+                    <a href="" data-scroll="true" data-id="#workflow">
+                        What We Do
+                    </a>
+                </li>
+                <li>
+                    <a href="" data-scroll="true" data-id="#projects">
+                        Famous Freebies
+                    </a>
+                </li>
+                <li>
+                    <a href="" data-scroll="true" data-id="#uitools">
+                        Premium UI Tools
+                    </a>
+                </li>
+                <li>
+                    <a href="" data-scroll="true" data-id="#clients">
+                        Testimonials
+                    </a>
+                </li>
+                <li>
+                    <a href="" data-scroll="true" data-id="#team">
+                        Team
+                    </a>
+                </li>
+                <li>
+                    <a href="" data-scroll="true" data-id="#numbers">
+                        Numbers
+                    </a>
+                </li>
+                <li>
+                    <a href="" data-scroll="true" data-id="#contact">
+                        Contact
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</nav>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+</body>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("Text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("Text");
+            ev.target.appendChild(document.getElementById(data));
+        }
+    </script>
+
+    <style type="text/css">
+        #div1, #div2 {
+            float: left;
+            width: 500px;
+            height: 500px;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+    </style>
+
+</head>
+<body>
+
+<!--表格-->
+
+<form class="form-horizontal" method="post">
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label" style="text-align: center">Email</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputEmail3" name="email233" placeholder="Email">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="inputPassword3" name="password233" placeholder="Password">
+        </div>
+    </div>
+</form>
+
+<hr/>
+
+<p>拖动 RUNOOB.COM 图片到矩形框中:</p>
+
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" class="form-control">
+    <img src="img.gif" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="22">
+    <p draggable="true" ondragstart="drag(event)" id="test1">test1</p>
+    <p draggable="true" ondragstart="drag(event)" id="test2">test2</p>
+    <p draggable="true" ondragstart="drag(event)" id="test3">test3</p>
+    <p draggable="true" ondragstart="drag(event)" id="test4">test4</p>
+    <p draggable="true" ondragstart="drag(event)" id="test5">test5</p>
+</div>
+
+<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" class="form-control"></div>
+<br/>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
