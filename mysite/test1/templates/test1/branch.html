@@ -1,0 +1,195 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Choose branch</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3 .7.3/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        body {
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+
+{#        拖拽的2个div    #}
+        #div1, #div2 {
+            float: left;
+            width: 600px;
+            height: 400px;
+            line-height: 150%;
+            font-size: 15px;
+            margin: 10px;
+            padding: 20px;
+            border: 2px solid #aaaaa0;
+            overflow:scroll;
+        }
+        p {
+            line-height: 150%;
+        }
+    </style>
+    <script>
+        function ChooseBranch(id) {
+            x = document.getElementById("Choose-Branch");
+            x.innerHTML = id.text;
+        }
+
+        <!-- 检查表单函数 -->
+        function checkForm(obj) {
+            {#  alert("start"); #}
+            if (obj.testbranch233.value === '') {
+                alert("请输入测试版本");
+                return false;
+            }
+            if (obj.testset233.value === '') {
+                alert("请选择测试集");
+                return false;
+            }
+            if (obj.testpatch233.value === '') {
+                alert("");
+                return false;
+            }
+            return true;
+        }
+
+        <!-- 用于拖拽的JS函数 -->
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+        <!-- 源对象开始被拖动的时候调用 ondragstart -->
+        function drag(ev) {
+            ev.dataTransfer.setData("Text", ev.target.id);
+        }
+        <!-- 源对象被拖动着在目标对象上方释放/松手 ondrop -->
+        function dropdiv2(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("Text");
+            ev.target.appendChild(document.getElementById(data));
+
+            x = document.getElementById("testset");
+            x.value += document.getElementById(data).textContent;
+            x.value += ", ";
+        }
+        function dropdiv1(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("Text");
+            ev.target.appendChild(document.getElementById(data));
+
+            x = document.getElementById("testset");
+            del = document.getElementById(data).textContent + ", ";
+
+            var val = x.value;
+            val = val.replace(del, "");
+            x.value = val;
+        }
+    </script>
+</head>
+<body>
+
+<!-- 导航栏 -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Choose Branch</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'test1:test1index' %}">Back To Index</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</nav>
+
+<!-- 主体 -->
+
+<h1>{{ welcome }}</h1>
+
+<hr/>
+
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form id="form1" onsubmit="return checkForm(this)" class="form-horizontal" method="post"
+      action="{% url 'test1:test1machines' %}">
+    {% csrf_token %}
+    <!-- 测试版本, type="url" -->
+    <div class="form-group">
+        <label for="testbranch" class="col-sm-2 control-label">测试版本</label>
+        <div class="col-sm-9">
+            <input type="url" class="form-control" id="testbranch" name="testbranch233" placeholder="input test branch">
+        </div>
+    </div>
+
+    <!-- 测试集 -->
+    <div class="form-group">
+        <label for="testset" class="col-sm-2 control-label">测试集</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="testset" name="testset233" placeholder="choose test set">
+
+            <br/>
+            <div id="div1" ondrop="dropdiv1(event)" ondragover="allowDrop(event)" class="form-control">
+                <p style="width: 400px;" draggable="true" ondragstart="drag(event)" id="test1">test1</p>
+                <p style="width: 400px;" draggable="true" ondragstart="drag(event)" id="test2">test2</p>
+                <p style="width: 400px;" draggable="true" ondragstart="drag(event)" id="test3">test3</p>
+                <p style="width: 400px;" draggable="true" ondragstart="drag(event)" id="test4">test4</p>
+                <p style="width: 400px;" draggable="true" ondragstart="drag(event)" id="test5">test5</p>
+            </div>
+
+            <!-- 把div2中的值显示在上面的input中 -->
+            <div id="div2" ondrop="dropdiv2(event)" ondragover="allowDrop(event)" class="form-control"></div>
+            <br/>
+
+        </div>
+    </div>
+
+    <!-- 测试patch -->
+    <div class="form-group">
+        <label for="testpatch" class="col-sm-2 control-label">测试patch</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="testpatch" name="testpatch233" placeholder="input test patch">
+        </div>
+    </div>
+    {#    提交按钮#}
+    <br />
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>
