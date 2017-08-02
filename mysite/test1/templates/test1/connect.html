@@ -15,8 +15,8 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://cdn.bootcss.com/html5shiv/3 .7.3/html5shiv.min.js"></script>
-    <script src="js/respond.min.js"></script>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="{% static 'js/respond.min.js' %}"></script>
     <![endif]-->
     <style type="text/css">
         body {
@@ -24,7 +24,7 @@
             padding-bottom: 50px;
         }
 
-{#        拖拽的2个div    #}
+        {#        拖拽的2个div    #}
         #div1, #div2 {
             float: left;
             width: 600px;
@@ -34,8 +34,9 @@
             margin: 10px;
             padding: 20px;
             border: 2px solid #aaaaa0;
-            overflow:scroll;
+            overflow: scroll;
         }
+
         p {
             line-height: 150%;
         }
@@ -58,7 +59,7 @@
                 return false;
             }
             if (obj.testpatch233.value === '') {
-                alert("");
+                alert("请输入测试patch");
                 return false;
             }
             return true;
@@ -94,6 +95,7 @@
             val = val.replace(del, "");
             x.value = val;
         }
+
     </script>
 </head>
 <body>
@@ -110,7 +112,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Choose Branch</a>
+            <a class="navbar-brand">Connect TestMaster</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -136,8 +138,9 @@
     <p><strong>{{ error_message }}</strong></p>
 {% endif %}
 
-<form id="form1" onsubmit="return checkForm(this)" class="form-horizontal" method="post"
-      action="{% url 'test1:test1machines' %}">
+
+<!-- 表单！表单信息传递给服务器, 不是TestMaster, 服务器把表单信息传给 TestMaster, TestMaster返回的结果呈现在 Machines 页面中 -->
+<form id="form1" onsubmit="return checkForm(this)" class="form-horizontal" method="post" action="{% url 'test1:test1machines' %}">
     {% csrf_token %}
     <!-- 测试版本, type="url" -->
     <div class="form-group">
@@ -151,7 +154,8 @@
     <div class="form-group">
         <label for="testset" class="col-sm-2 control-label">测试集</label>
         <div class="col-sm-9">
-            <input type="text" class="form-control" id="testset" name="testset233" placeholder="choose test set">
+            <input type="text" class="form-control" id="testset" name="testset233" placeholder="choose test set"
+                   readonly="readonly">
 
             <br/>
             <div id="div1" ondrop="dropdiv1(event)" ondragover="allowDrop(event)" class="form-control">
@@ -177,14 +181,13 @@
         </div>
     </div>
     {#    提交按钮#}
-    <br />
+    <br/>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" href="">Submit</button>
         </div>
     </div>
 </form>
-
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>

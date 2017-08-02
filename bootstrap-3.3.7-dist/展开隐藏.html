@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>jQuery UI Accordion - Default functionality</title>
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+    <script>
+        $(function () {
+            $("#accordion").accordion();
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        function click(id) {
+            alert("click!");
+        }
+
+        function Show_Hidden(trid) {
+            if (trid.style.display === "block") {
+                trid.style.display = 'none';
+            } else {
+                trid.style.display = 'block';
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="accordion">
+    <h3>Master <a href="#" onclick="click()">click</a> </h3>
+    <div>
+        <p>
+            Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+            ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+            amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+            odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+        </p>
+        <button type="button" onclick="click(this)">click</button>
+    </div>
+    <h3>Develop</h3>
+    <div>
+        <p>
+            Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+            purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+            velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+            suscipit faucibus urna.
+        </p>
+    </div>
+    <h3>Section 3</h3>
+    <div>
+        <p>
+            Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+            Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+            ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+            lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+        </p>
+        <ul>
+            <li>List item one</li>
+            <li>List item two</li>
+            <li>List item three</li>
+        </ul>
+    </div>
+    <h3>Section 4</h3>
+    <div>
+        <p>
+            Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+            et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+            faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+            mauris vel est.
+        </p>
+        <p>
+            Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+            inceptos himenaeos.
+        </p>
+    </div>
+</div>
+
+<br><br><br>
+
+<a href="#" onclick="Show_Hidden(tr1);">申报3A级、2A级、1A级的旅游景区</a>
+<table>
+    <tr id="tr1" style="display:none;">
+        <td>
+            凡在中华人民共和国境内，正式开业从事旅游经营业务一年以上的旅游景区，包括风景区、文博院馆、寺庙观堂、旅游度假区、自然保护区、主题公园、森林公园、地质公园、游乐园、动物园、植物园及工业、农业、经贸、科教、军事、体育、文化艺术等旅游景区，均可申请参加质量等级评定。
+            旅游景区质量等级评定，是指对具有独立管理和服务机构的旅游景区进行评定，对园中园、景中景等内部旅游点，不进行单独评定。
+        </td>
+    </tr>
+</table>
+
+
+</body>
+</html>

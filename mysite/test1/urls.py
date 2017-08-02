@@ -6,5 +6,7 @@ app_name = 'test1'
 urlpatterns = [
     url(r'^$', views.index, name='test1index'),
     url(r'^machines/$', views.machines, name='test1machines'),
-    url(r'^branch/$', views.branch, name='test1branch'),
+    url(r'^machinesCIS/$', views.machinesCIS, name='test1machinesCIS'),
+    url(r'^connect/$', views.connect, name='test1connect'),
+    url(r'^buildbranch/$', views.buildbranch, name='test1build'),
 ]
