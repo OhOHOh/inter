@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Testset
 
 # Create your views here.
 
@@ -14,8 +15,11 @@ def index(request):
     return render(request, 'test1/index.html', context)
 
 # ex: test1/connect/
+# 从数据库中取得测试集的名称
 def connect(request):
+    testset_list = Testset.objects.order_by('setName')
     context = {
+        'testset_list': testset_list,
         'welcome': "Welcome to test1/views.connect, please input",
     }
     return render(request, 'test1/connect.html', context)

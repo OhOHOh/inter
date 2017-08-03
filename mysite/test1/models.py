@@ -40,3 +40,9 @@ class Errortext(models.Model):
 
     def __str__(self):
         return self.errorid
+
+class Testset(models.Model):
+    setName = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.setName

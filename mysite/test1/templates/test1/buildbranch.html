@@ -27,15 +27,15 @@
 
         .button_compile {
             margin-left: 20px;
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             border: 0;
             background: url("{% static "images/settings.png" %}") no-repeat;
         }
         .button_start {
             margin-left: 20px;
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             border: 0;
             background: url("{% static "images/start.gif" %}") no-repeat;
         }
@@ -49,8 +49,13 @@
             });
         });
 
+        <!-- 编译 按钮的点击响应 -->
         function click666() {
             alert('click!');
+        }
+        <!-- 开始 按钮的点击响应 -->
+        function click667() {
+            window.location.href="{% url 'test1:test1machines' %}"
         }
     </script>
 
@@ -73,7 +78,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href={% url 'test1:test1connect' %}>Back to Connect</a></li>
+                <li><a href="{% url 'test1:test1connect' %}">Back To Connect</a></li>
                 <li><a href="{% url 'test1:test1index' %}">Back To Index</a></li>
             </ul>
         </div>
@@ -85,7 +90,7 @@
 <div id="accordion">
     <h3>Master
         <button onclick="click666()" class="button_compile"></button>
-        <button onclick="click666()" class="button_start"></button>
+        <button onclick="click667()" class="button_start"></button>
     </h3>
     <div>
         <p>
@@ -98,7 +103,7 @@
 
     <h3>Develop
         <button onclick="click666()" class="button_compile"></button>
-        <button onclick="click666()" class="button_start"></button>
+        <button onclick="click667()" class="button_start"></button>
     </h3>
     <div>
         <p>
@@ -111,7 +116,7 @@
 
     <h3>branch1
         <button onclick="click666()" class="button_compile"></button>
-        <button onclick="click666()" class="button_start"></button>
+        <button onclick="click667()" class="button_start"></button>
     </h3>
     <div>
         <p>
@@ -129,7 +134,7 @@
 
     <h3>branch2
         <button onclick="click666()" class="button_compile"></button>
-        <button onclick="click666()" class="button_start"></button>
+        <button onclick="click667()" class="button_start"></button>
     </h3>
     <div>
         <p>
@@ -148,5 +153,7 @@
 
 <br/>
 
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
 </body>
 </html>

@@ -84,6 +84,9 @@
             x = document.getElementById("Choose-Branch");
             x.innerHTML = id.text;
         }
+        function click6() {
+            alert("查询！");
+        }
     </script>
 </head>
 <body>
@@ -104,11 +107,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" onclick="click6()">Query</a></li>
                 <li><a href="{% url 'test1:test1index' %}">Back To Index</a></li>
             </ul>
-            {#      <form class="navbar-form navbar-right">#}
-            {#        <input type="text" class="form-control" placeholder="Search...">#}
-            {#      </form>#}
         </div>
     </div>
 </nav>
