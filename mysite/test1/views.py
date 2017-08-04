@@ -1,8 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Testset
+from .models import Testset, UerLogin
 
 # Create your views here.
+
+# 最初进入网点, 进行密码登录
+def login(request):
+    userDB = 
+
 
 # 最初进入网点
 def index(request):

@@ -137,13 +137,13 @@
 
 
 <!-- 表单！表单信息传递给服务器, 不是TestMaster, 服务器把表单信息传给 TestMaster, TestMaster返回的结果呈现在 Machines 页面中 -->
-<form id="form1" onsubmit="return checkForm(this)" class="form-horizontal" method="post" action="{% url 'test1:test1build' %}">
+<form id="form1" onsubmit="return checkForm(this)" class="form-horizontal" method="post" action="{% url 'test1:test1build' %}"> <!-- onsubmit="return checkForm(this)" -->
     {% csrf_token %}
     <!-- 测试版本, type="url" -->
     <div class="form-group">
         <label for="testbranch" class="col-sm-2 control-label">测试版本</label>
         <div class="col-sm-9">
-            <input type="url" class="form-control" id="testbranch" name="testbranch233" placeholder="input test branch">
+            <input type="url" class="form-control" id="testbranch" name="testbranch233" placeholder="input test branch" required>
         </div>
     </div>
 
@@ -173,7 +173,7 @@
     <div class="form-group">
         <label for="testpatch" class="col-sm-2 control-label">测试patch</label>
         <div class="col-sm-9">
-            <input type="text" class="form-control" id="testpatch" name="testpatch233" placeholder="input test patch">
+            <input type="text" class="form-control" id="testpatch" name="testpatch233" placeholder="input test patch" required>
         </div>
     </div>
     {#    提交按钮#}
