@@ -22,6 +22,6 @@ app_name = 'mysiteNamespace'
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
-    url(r'^$', test1_views.index),
+    url(r'^$', test1_views.login),
     url(r'^test1/', include('test1.urls')),
 ]

@@ -1,19 +1,21 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Testset, UerLogin
+from .models import Testset, UserLogin
 
 # Create your views here.
 
 # 最初进入网点, 进行密码登录
 def login(request):
-    userDB = 
+    context = {
+        'welcome': "Weclome to test1/views.login",
+    }
+    return render(request, 'test1/login.html', context)
 
-
-# 最初进入网点
+# 输入正确的密码之后, 进入网点
 def index(request):
     # 从request中获取各个机器的运行状态
     context = {
-        'welcome': "Welcome to test1/views.Machines",
+        'welcome': "Welcome to test1/views.index",
         'page1' : "压力测试系统",
         'page2' : "持续集成系统",
     }
