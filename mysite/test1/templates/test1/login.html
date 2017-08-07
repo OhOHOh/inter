@@ -30,22 +30,33 @@
 </head>
 <body>
 
+<div>
+    {% if login == 'fail' %}
+        <script>
+            alert("帐号或密码输入错误！请重新输入");
+        </script>
+    {% endif %}
+</div>
+
+
 <div class="container">
 
-    <form class="form-signin" action="{% url 'test1:test1index' %}">
+    <form class="form-signin" method="post">
+        {% csrf_token %}
         <h2 class="form-signin-heading">Please sign in</h2>
-        <!-- 帐号 -->
+        <!-- 帐号 name="username"-->
         <label for="inputName" class="sr-only">Username</label>
-        <input type="text" id="inputName" class="form-control" placeholder="Username" required autofocus>
-        <!-- 密码 -->
+        <input type="text" id="inputName" name="username" class="form-control" placeholder="Username" required autofocus>
+        <!-- 密码 name="password"-->
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+        <!-- Remember me name="rememberme" -->
+{#        <div class="checkbox">#}
+{#            <label>#}
+{#                <input type="checkbox" value="remember-me" name="rememberme"> Remember me#}
+{#            </label>#}
+{#        </div>#}
+        <br />
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
 

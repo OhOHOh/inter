@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p>请输入</p>
+<form action="/add/" method="get">
+    color: <input type="text" id="color" name="color" value="red"> <br>
+    number: <input type="text" id="number" name="number" value="1"> <br>
+    <p>result: <span id='result'></span></p>
+    <button type="button" id='sum'>提交</button>
+</form>
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+      $("#sum").click(function(){
+        var color = $("#color").val();
+        var number = $("#number").val();
+
+        $.get("{% url 'get-pic' %}", {'color':color,'number':number}, function(ret){
+            $('#result').html('') //清空前面的结果
+            $.each(ret, function(index, item){
+                $('#result').append('<img src="/static/pics/'+item+'">');
+            })
+        })
+      });
+    });
+</script>
+</body>
+</html>
+
