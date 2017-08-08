@@ -46,7 +46,7 @@
         <h2 class="form-signin-heading">Please sign in</h2>
         <!-- 帐号 name="username"-->
         <label for="inputName" class="sr-only">Username</label>
-        <input type="text" id="inputName" name="username" class="form-control" placeholder="Username" required autofocus>
+        <input type="text" id="inputName" name="username" class="form-control" placeholder="Username" onkeyup="showHint(this.value)" required autofocus>
         <!-- 密码 name="password"-->
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
@@ -65,6 +65,43 @@
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+<!-- AJAX -->
+<script>
+    function showHint(str) {
+        if (str.length === 0) {
+            $(document).ready(function () {
+               $('#inputName').css('background-color', '#FFFFFF');
+            });
+            return;
+        }
+        $.ajax({
+            url: "{% url 'test1:test1apilogin' %}",
+            type: 'POST',
+            data: {'username': $('#inputName').val()},
+
+            <!-- 服务器成功返回数据 data -->
+            success:function (data) {
+                if (data === '1') {
+{#                    alert("终于在数据库表中找到了" + str);   绿色  #}
+                    $(document).ready(function () {
+                        $('#inputName').css('background-color', '#C1FFE4');
+                    });
+                } else {
+{#                    alert("还没有找到" + str);  红色    #}
+                    $(document).ready(function () {
+                        $('#inputName').css('background-color', '#FF9797');
+                    });
+                }
+            }
+
+        })
+    }
+</script>
 
 </body>
 </html>

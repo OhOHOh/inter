@@ -2,9 +2,11 @@ from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import Testset, UserLogin
 from django import forms
+import json
 
 
 # Create your views here.
@@ -17,11 +19,6 @@ class UserLoginForm(forms.Form):
 
 # 最初进入网点, 进行密码登录
 def login(request):
-    context = {
-        'welcome': "Weclome to test1/views.login",
-        'login': "success",
-    }
-
     if request.method == 'POST':
         uf = UserLoginForm(request.POST)
         if uf.is_valid():
@@ -106,3 +103,27 @@ def machinesCIS(request):
         'welcome': "Welcome to test1/views.machinesCIS",
     }
     return render(request, 'test1/machinesCIS.html', context)
+
+
+# API 接口函数
+
+@csrf_exempt
+def apiLogin(request):
+    """
+    通过访问 url: test1/api/login 来获取函数的执行
+    :param request:
+    :return:
+    """
+    if request.method == 'POST':
+        ret = {'statusa': False, 'message': ''}
+        username = request.POST.get('username')
+        print(username)
+
+        userDB = UserLogin.objects.filter(username__exact=username)
+        if userDB:
+            # ret['statusa'] = True
+            return HttpResponse('1')
+        else:
+            return HttpResponse('2')
+
+    return render(request, 'test1/login.html')
