@@ -39,23 +39,38 @@
             border: 0;
             background: url("{% static "images/start.gif" %}") no-repeat;
         }
+        .main {
+            padding-top: 10px;
+            padding-bottom: 30px;
+        }
 
     </style>
 
     <script>
         $(function () {
             $("#accordion").accordion({
-                collapsible: true
+                collapsible: true,
+                heightStyle: "content"
             });
         });
 
         <!-- 编译 按钮的点击响应 -->
-        function click666() {
+        function click666(id) {
             alert('click!');
+            $(document).ready(function () {
+                $(id).css('background', 'url("{% static "images/loading.gif" %}") no-repeat')
+            });
         }
         <!-- 开始 按钮的点击响应 -->
-        function click667() {
-            window.location.href="{% url 'test1:test1machines' %}"
+        function click667(id) {
+            $(document).ready(function () {
+                $(id).css('background', 'url("{% static "images/loading.gif" %}") no-repeat')
+            });
+            <!-- 发送 "运行" 指令给 TestMaster , 并从 TestMaster 获取机器的运行情况 -->
+            alert("发送 '运行' 指令给 TestMaster , 并从 TestMaster 获取机器的运行情况, 并运行情况显示在 Machines Info 界面上, 跳转到 Machines Info 界面");
+
+
+            window.location.href="{% url 'test1:test1machines' %}";
         }
     </script>
 
@@ -88,22 +103,34 @@
 
 <!-- 主体 -->
 <div id="accordion">
-    <h3>Master
-        <button onclick="click666()" class="button_compile"></button>
-        <button onclick="click667()" class="button_start"></button>
+    <h3><span id="branchName">Master</span>
+        <button onclick="click666(this)" class="button_compile"></button>
+        <button onclick="click667(this)" class="button_start"></button>
+        <span>存放测试集的名字</span>
     </h3>
-    <div>
-        <p>
-            Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
-            ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
-            amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
-            odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
-        </p>
+    <div><!-- accordion 使用 -->
+        <div class="col-sm-12 col-md-12 main">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead> <!-- 表格的表头 -->
+                        <tr>
+                            <th>编译次数</th>
+                            <th>Last Build</th>
+                            <th>运行次数</th>
+                            <th>Last Run</th>
+                        </tr>
+                    </thead> <!-- 表格的内容 -->
+                    <tbody>
+                        <!-- 从 TestMaster 那边传递数据过来 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <h3>Develop
-        <button onclick="click666()" class="button_compile"></button>
-        <button onclick="click667()" class="button_start"></button>
+        <button onclick="click666(this)" class="button_compile"></button>
+        <button onclick="click667(this)" class="button_start"></button>
     </h3>
     <div>
         <p>
@@ -115,8 +142,8 @@
     </div>
 
     <h3>branch1
-        <button onclick="click666()" class="button_compile"></button>
-        <button onclick="click667()" class="button_start"></button>
+        <button onclick="click666(this)" class="button_compile"></button>
+        <button onclick="click667(this)" class="button_start"></button>
     </h3>
     <div>
         <p>
@@ -133,8 +160,8 @@
     </div>
 
     <h3>branch2
-        <button onclick="click666()" class="button_compile"></button>
-        <button onclick="click667()" class="button_start"></button>
+        <button onclick="click666(this)" class="button_compile"></button>
+        <button onclick="click667(this)" class="button_start"></button>
     </h3>
     <div>
         <p>

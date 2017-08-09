@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jsonp</title>
+</head>
+<body>
+
+<script>
+    function weather(data) {//回调函数
+        console.log(data);
+    }
+</script>
+
+<script src="http://cdn.weather.hao.360.cn/api_weather_info.php?app=hao360&_jsonp=weather&code=131111"></script>
+//这是360天气的一个天气预报的一个api接口,
+
+</body>
+</html>
