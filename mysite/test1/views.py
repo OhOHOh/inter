@@ -62,10 +62,32 @@ def connect(request):
 
 # ex: test1/buildbranch/
 def buildbranch(request):
-    context = {
-        'welcome': "Welcome to test1/views.build",
-    }
-    return render(request, 'test1/buildbranch.html', context)
+    """
+    从 connect.html 界面上传过来的表单数据, 将其中的 测试集名称显示在本页面( buildbranch.html )上
+    :param request:
+    :return:
+    """
+    try:
+        testaddress = request.POST['testaddress233']
+        testset = request.POST['testset233']
+        testpatch = request.POST['testpatch233']
+    except(KeyError):
+        context = {'error_message': "Not find the TestMaster"}
+        return fail(request, context)  # 将'失败'后返回的'失败界面'并显示'失败信息' 的行为封装成一个独立的函数 fail
+        # return render(request, 'test1/fail.html', {
+        #     'error_message': "Not find the TestMaster"
+        # })
+    else:
+        context = {
+            'welcome': "Welcome to test1/views.build",
+            'address': testaddress,
+            'set': testset[:-2],  # 删去最后2个字符 ', '
+            'patch': testpatch,
+        }
+        print(testset)
+        return render(request, 'test1/buildbranch.html', context)
+
+    # return render(request, 'test1/buildbranch.html', context)
 
 
 # ex: test1/machines/   由branch页面提交表单后跳转过来
@@ -73,7 +95,7 @@ def buildbranch(request):
 #     # 从request中获取各个机器的运行状态, request中有 机器的测试编号, 运行时间, 运行状态, 运行距离等
 #     # 如何从 request 中获取这些数据? 并封装成字典的形式?
 #     try:
-#         testbranch = request.POST['testbranch233']   # name 属性
+#         testbranch = request.POST['testaddress233']   # name 属性
 #         testset = request.POST['testset233']
 #         testpatch = request.POST['testpatch233']
 #     except(KeyError):
@@ -106,7 +128,6 @@ def machinesCIS(request):
 
 
 # API 接口函数
-
 @csrf_exempt
 def apiLogin(request):
     """
@@ -127,3 +148,7 @@ def apiLogin(request):
             return HttpResponse('2')
 
     return render(request, 'test1/login.html')
+
+# 不是 视图函数
+def fail(request, context):
+    return render(request, 'test1/fail.html', context)
