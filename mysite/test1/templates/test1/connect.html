@@ -18,6 +18,7 @@
     <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="{% static 'js/respond.min.js' %}"></script>
     <![endif]-->
+    <script src="{% static 'test1/mysite_connect.js' %}"></script>
     <style type="text/css">
         body {
             padding-top: 50px;
@@ -41,62 +42,6 @@
             line-height: 150%;
         }
     </style>
-    <script>
-        function ChooseBranch(id) {
-            x = document.getElementById("Choose-Branch");
-            x.innerHTML = id.text;
-        }
-
-        <!-- 检查表单函数 -->
-        function checkForm(obj) {
-            {#  alert("start"); #}
-            if (obj.testaddress233.value === '') {
-                alert("请输入测试版本");
-                return false;
-            }
-            if (obj.testset233.value === '') {
-                alert("请选择测试集");
-                return false;
-            }
-            if (obj.testpatch233.value === '') {
-                alert("请输入测试patch");
-                return false;
-            }
-            return true;
-        }
-
-        <!-- 用于拖拽的JS函数 -->
-        function allowDrop(ev) {
-            ev.preventDefault();
-        }
-        <!-- 源对象开始被拖动的时候调用 ondragstart -->
-        function drag(ev) {
-            ev.dataTransfer.setData("Text", ev.target.id);
-        }
-        <!-- 源对象被拖动着在目标对象上方释放/松手 ondrop -->
-        function dropdiv2(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData("Text");
-            ev.target.appendChild(document.getElementById(data));
-
-            x = document.getElementById("testsetinput");
-            x.value += document.getElementById(data).textContent;
-            x.value += ", ";
-        }
-        function dropdiv1(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData("Text");
-            ev.target.appendChild(document.getElementById(data));
-
-            x = document.getElementById("testsetinput");
-            del = document.getElementById(data).textContent + ", ";
-
-            var val = x.value;
-            val = val.replace(del, "");
-            x.value = val;
-        }
-
-    </script>
 </head>
 <body>
 
@@ -181,7 +126,7 @@
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="button" class="btn btn-primary" onclick="connectTestMaster()">测试连接</button>
-            <button type="submit" class="btn btn-primary" href="">提交</button>
+            <button type="submit" class="btn btn-primary" href="" id="submit" disabled="disabled">提交</button>
         </div>
     </div>
 </form>
@@ -190,17 +135,6 @@
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
-
-<script>
-    function connectTestMaster() { //在 form 表单的提交按钮上 设置的点击事件
-            alert("开始连接TestMaster");
-            // 进行 TestMaster 的连接:
-
-            // 假设连接成功, 将表单内容提交到指定的视图函数中
-            //window.location.href = "{% url 'test1:test1build' %}";
-            alert("TestMaster连接成功!");
-        }
-</script>
 
 </body>
 </html>
