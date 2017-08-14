@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^buildbranch/$', views.buildbranch, name='test1build'),
 
     # API 接口的 url
-    url(r'^api/login/$', views.apiLogin, name='test1apilogin'),
+    url(r'^api/login/$', views.apiLogin),
+    url(r'^api/connecting/$', views.tryConnect),
 ]

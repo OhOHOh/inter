@@ -18,7 +18,35 @@
         var jQuery_New = $.noConflict(true);
     </script>
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="{% static 'test1/mysite_buildbranch.js' %}"></script>
+
+    <!-- JS函数 -->
+    <script>
+        $(function () {
+            $("#accordion").accordion({
+                collapsible: true,
+                heightStyle: "content"
+            });
+        });
+        <!--编译按钮的点击响应 -->
+        function click666(id) {
+            alert('click!');
+            $(document).ready(function () {
+                $(id).css('background', 'url("{% static "images/loading.gif" %}") no-repeat')
+            });
+        }
+        <!-- 开始 按钮的点击响应 -->
+        function click667(id) {
+            $(document).ready(function () {
+                $(id).css('background', 'url("{% static "images/loading.gif" %}") no-repeat')
+            });
+            <!-- 发送 "运行" 指令给 TestMaster , 并从 TestMaster 获取机器的运行情况 -->
+            alert("发送 '运行' 指令给 TestMaster , 并从 TestMaster 获取机器的运行情况, 并运行情况显示在 Machines Info 界面上, 跳转到 Machines Info 界面");
+
+
+            this.location.href = "{% url 'test1:test1machines' %}";
+            alert('跳转地址');
+        }
+    </script>
 
     <style type="text/css">
         body {
@@ -33,6 +61,7 @@
             border: 0;
             background: url("{% static "images/settings.png" %}") no-repeat;
         }
+
         .button_start {
             margin-left: 20px;
             width: 20px;
@@ -40,6 +69,7 @@
             border: 0;
             background: url("{% static "images/start.gif" %}") no-repeat;
         }
+
         .main {
             padding-top: 10px;
             padding-bottom: 30px;
@@ -48,7 +78,9 @@
     </style>
 
 </head>
-<body>
+<body onload="getDataFromTM(id='table1')">
+
+<script src="{% static 'test1/mysite_buildbranch.js' %}"></script>
 
 <!-- 导航栏 -->
 
@@ -84,17 +116,18 @@
     <div><!-- accordion 使用 -->
         <div class="col-sm-12 col-md-12 main">
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table class="table table-hover" id="table1">
                     <thead> <!-- 表格的表头 -->
-                        <tr>
-                            <th>编译次数</th>
-                            <th>Last Build</th>
-                            <th>运行次数</th>
-                            <th>Last Run</th>
-                        </tr>
+                    <tr>
+                        <th>编译次数</th>
+                        <th>Last Build</th>
+                        <th>运行次数</th>
+                        <th>Last Run</th>
+                    </tr>
                     </thead> <!-- 表格的内容 -->
+
                     <tbody>
-                        <!-- 从 TestMaster 那边传递数据过来 -->
+                    <!-- 从 TestMaster 那边传递数据过来 -->
                     </tbody>
                 </table>
             </div>
@@ -155,5 +188,21 @@
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- AJAX  -->
+<script>
+    function getDataFromTM(id) {
+        //向 TestMaster 发送请求, 获取数据：（branch名称、编译次数、运行次数、last compile、last run）每个branch都有5个数据
+        $.ajax({
+            url: "",
+            type: 'POST',
+            data: {'getdata': 'hello'},
+            dataType: 'json',
+
+            success: function (data) {  //data是JSON数据
+
+            }
+        })
+    }
+</script>
 </body>
 </html>

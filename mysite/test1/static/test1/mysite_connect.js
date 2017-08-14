@@ -57,13 +57,26 @@ function dropdiv1(ev) {
 }
 
 <!-- 用于测试连接 TestMaster 的函数 -->
-function connectTestMaster() { //在 form 表单的提交按钮上 设置的点击事件bui
-    alert("开始连接TestMaster");
+function connectTestMaster() {
+    x = document.getElementById("testbranch");
+    var val = x.value;
+
     // 进行 TestMaster 的连接:
+    $.ajax({
+        //url: "test1/api/connecting/",  //填写是的接口的地址, 在 views 中的函数里测试 connect
+        url: "/test1/api/connecting/",
+        type: 'POST',
+        data: {'ip': val},
 
-    // 假设连接成功, 将表单内容提交到指定的视图函数中
-    document.getElementById('submit').disabled = false;
-    //window.location.href = "{% url 'test1:test1build' %}";
-    alert("TestMaster连接成功!");
-
+        success: function (data) {
+            if (data === '1') {
+                // 假设连接成功, 将表单内容提交到指定的视图函数中
+                document.getElementById('submit').disabled = false;
+                alert("TestMaster连接成功!");
+            }
+            else {
+                alert("TestMaster连接失败！");
+            }
+        }
+    });
 }

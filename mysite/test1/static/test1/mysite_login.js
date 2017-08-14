@@ -7,7 +7,7 @@ function showHint(id) {
         return;
     }
     $.ajax({
-        url: "test1/api/login/",
+        url: "/test1/api/login/",
         type: 'POST',
         data: {'username': $(id).val()},
 

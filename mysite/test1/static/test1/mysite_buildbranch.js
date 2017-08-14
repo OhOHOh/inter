@@ -27,3 +27,17 @@ function click667(id) {
 
     window.location.href = "{% url 'test1:test1machines' %}";
 }
+
+function getDataFromTM(id) {
+    //向 TestMaster 发送请求, 获取数据：（branch名称、编译次数、运行次数、last compile、last run）每个branch都有5个数据
+    $.ajax({
+        url: "",
+        type: 'POST',
+        data: {'getdata':'hello'},
+        dataType: 'json',
+
+        success: function (data) {  //data是JSON数据
+
+        }
+    })
+}

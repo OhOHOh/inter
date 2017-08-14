@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Testset, UserLogin
 from django import forms
 import json
+import telnetlib
 
 
 # Create your views here.
@@ -32,7 +33,7 @@ def login(request):
                 return HttpResponseRedirect(reverse('test1:test1index'))
             else:
                 return render(request, 'test1/login.html', {
-                    'welcome': "Weclome to test1/views.login",
+                    'welcome': "Welcome to test1/views.login",
                     'login': "fail",
                 })
     else:
@@ -113,7 +114,7 @@ def buildbranch(request):
 #         return render(request, 'test1/machines.html', context)
 def machines(request):
     context = {
-        'welcome': "Weclome to test1/views.machines",
+        'welcome': "Welcome to test1/views.machines",
         'range': range(1, 16),
     }
     return render(request, 'test1/machines.html', context)
@@ -125,6 +126,11 @@ def machinesCIS(request):
         'welcome': "Welcome to test1/views.machinesCIS",
     }
     return render(request, 'test1/machinesCIS.html', context)
+
+# 不是 视图函数
+def fail(request, context):
+    return render(request, 'test1/fail.html', context)
+
 
 
 # API 接口函数
@@ -149,6 +155,22 @@ def apiLogin(request):
 
     return render(request, 'test1/login.html')
 
-# 不是 视图函数
-def fail(request, context):
-    return render(request, 'test1/fail.html', context)
+@csrf_exempt
+def tryConnect(request):
+    """
+    通过访问 url: test1/api/connect/ 来获取函数的执行
+    在页面 connect.html 中的 connectTestMaster 函数中引用的 API
+    :return:
+    """
+    if request.method == 'POST':
+        ip = request.POST.get('ip')
+        print(ip)
+        try:
+            telnetlib.Telnet(ip, port='8000', timeout=20)
+        except:
+            print('connect fail')
+            return HttpResponse('0')
+        else:
+            print('connect success')
+            return HttpResponse('1')
+    return render(request, 'test1/connect.html')
