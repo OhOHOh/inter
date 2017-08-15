@@ -53,3 +53,15 @@ class UserLogin(models.Model):
 
     def __str__(self):
         return self.username
+
+# 在 buildbranch.html 中使用, 存储的是 branch 的5个信息：branch名字(需要从TM中传过来)、编译次数、最近编译时间、运行次数、最近运行次数
+class BranchInfo(models.Model):
+    branch_name = models.CharField(max_length=100)
+    compile_times = models.IntegerField(default=0)
+    last_compile = models.DateTimeField(auto_now=True)
+    run_times = models.IntegerField(default=0)
+    last_run = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.branch_name
+

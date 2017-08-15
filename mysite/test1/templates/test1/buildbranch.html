@@ -78,9 +78,9 @@
     </style>
 
 </head>
-<body onload="getDataFromTM(id='table1')">
+<body> <!-- onload="getDataFromTM(id='table1')" -->
 
-<script src="{% static 'test1/mysite_buildbranch.js' %}"></script>
+{#<script src="{% static 'test1/mysite_buildbranch.js' %}"></script>#}
 
 <!-- 导航栏 -->
 
@@ -137,6 +137,7 @@
     <h3>Develop
         <button onclick="click666(this)" class="button_compile"></button>
         <button onclick="click667(this)" class="button_start"></button>
+        <span>{{ set }}</span>
     </h3>
     <div>
         <p>
@@ -146,60 +147,24 @@
             suscipit faucibus urna.
         </p>
     </div>
-
-    <h3>branch1
-        <button onclick="click666(this)" class="button_compile"></button>
-        <button onclick="click667(this)" class="button_start"></button>
-    </h3>
-    <div>
-        <p>
-            Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
-            Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
-            ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-            lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
-        </p>
-        <ul>
-            <li>List item one</li>
-            <li>List item two</li>
-            <li>List item three</li>
-        </ul>
-    </div>
-
-    <h3>branch2
-        <button onclick="click666(this)" class="button_compile"></button>
-        <button onclick="click667(this)" class="button_start"></button>
-    </h3>
-    <div>
-        <p>
-            Cras dictum. Pellentesque habitant morbi tristique senectus et netus
-            et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
-            faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
-            mauris vel est.
-        </p>
-        <p>
-            Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
-            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-            inceptos himenaeos.
-        </p>
-    </div>
 </div>
 
 <br/>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
-<!-- AJAX  -->
+<!-- AJAX -->
 <script>
-    function getDataFromTM(id) {
+    function getBranchNameFromTM(id) {
         //向 TestMaster 发送请求, 获取数据：（branch名称、编译次数、运行次数、last compile、last run）每个branch都有5个数据
         $.ajax({
-            url: "",
+            url: {{ address }},
             type: 'POST',
-            data: {'getdata': 'hello'},
+            data: {'getbranch': 'hello'},
             dataType: 'json',
 
             success: function (data) {  //data是JSON数据
-
+                alert("成功地从TestMaster处获取地址")
             }
         })
     }

@@ -4,11 +4,15 @@
       <w>bootcss</w>
       <w>buildbranch</w>
       <w>dropdiv</w>
+      <w>errorid</w>
+      <w>errortext</w>
+      <w>getbranch</w>
       <w>getdata</w>
       <w>mysite</w>
       <w>navbar</w>
       <w>ondragstart</w>
       <w>ondrop</w>
+      <w>onload</w>
       <w>rememberme</w>
       <w>signin</w>
       <w>statusa</w>
@@ -19,6 +23,7 @@
       <w>testpatch</w>
       <w>testset</w>
       <w>testsetinput</w>
+      <w>vivamus</w>
     </words>
   </dictionary>
 </component>
