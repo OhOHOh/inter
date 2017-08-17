@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
-from .models import Testset, UserLogin
+from .models import Testset, UserLogin, BranchInfo
 from django import forms
 import json
 import telnetlib
@@ -88,7 +88,7 @@ def buildbranch(request):
         print(testset)
         return render(request, 'test1/buildbranch.html', context)
 
-    # return render(request, 'test1/buildbranch.html', context)
+        # return render(request, 'test1/buildbranch.html', context)
 
 
 # ex: test1/machines/   由branch页面提交表单后跳转过来
@@ -127,10 +127,10 @@ def machinesCIS(request):
     }
     return render(request, 'test1/machinesCIS.html', context)
 
+
 # 不是 视图函数
 def fail(request, context):
     return render(request, 'test1/fail.html', context)
-
 
 
 # API 接口函数
@@ -155,6 +155,7 @@ def apiLogin(request):
 
     return render(request, 'test1/login.html')
 
+
 @csrf_exempt
 def tryConnect(request):
     """
@@ -174,3 +175,32 @@ def tryConnect(request):
             print('connect success')
             return HttpResponse('1')
     return render(request, 'test1/connect.html')
+
+
+@csrf_exempt
+def makeJson(request):
+    '''
+    访问地址： test1/api/makejson/
+    用于生成一个 JSON 数据，模拟 TestMaster 返回的 branch 的信息
+    :param request:
+    :return:
+    '''
+    if request.method == 'POST':
+        message = request.POST.get('getbranch')
+        if message == 'helloTestMaster':  # 是 buildbranch.html 界面中的 AJAX 发来的信息
+            # 生成一个 JSON 数据,JSON 中的 key 暂定为 branchName, compileTimes, runTimes, lastCompile, lastRun
+            data = [{
+                'branchName': 'testBranchName1',
+                'compileTimes': 100,
+                'runTimes': 100,
+                'lastCompile': '2020-10-1',
+                'lastRun': '2020-10-3',
+            },
+                {
+                    'branchName': 'develop',
+                    'compileTimes': 200,
+                    'runTimes': 200,
+                    'lastCompile': '2030-10-1',
+                    'lastRun': '2030-10-3',
+                }]
+            return HttpResponse(json.dumps(data))

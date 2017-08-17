@@ -78,7 +78,7 @@
     </style>
 
 </head>
-<body> <!-- onload="getDataFromTM(id='table1')" -->
+<body onload="getBranchInfoFromTM()"> <!-- onload="getDataFromTM(id='table1')" -->
 
 {#<script src="{% static 'test1/mysite_buildbranch.js' %}"></script>#}
 
@@ -155,19 +155,24 @@
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <!-- AJAX -->
 <script>
-    function getBranchNameFromTM(id) {
-        //向 TestMaster 发送请求, 获取数据：（branch名称、编译次数、运行次数、last compile、last run）每个branch都有5个数据
+    function getBranchInfoFromTM() { //在页面加载之后触发执行
+        //向 TestMaster 发送请求, 获取数据：（branch名称、编译次数、运行次数、last_compile、last_run）每个branch都有5个数据
+        // JSON 中的 key 暂定为 branchName, compileTimes, runTimes, lastCompile, lastRun
         $.ajax({
-            url: {{ address }},
+            url: {{ address }} + ':8000/test1/api/makejson', // 访问 TestMaster 的 REST API 的地址
+            async: false,   // 同步AJAX，等待 TM 返回 branchName
             type: 'POST',
-            data: {'getbranch': 'hello'},
+            data: {'getbranch': 'helloTestMaster'},
             dataType: 'json',
 
             success: function (data) {  //data是JSON数据
-                alert("成功地从TestMaster处获取地址")
+                alert("成功地从TestMaster处获取每个branch的信息, 将每条 branch 的信息显示在页面上");
+                dataObject = JSON.parse(data);
+                alter(dataObject);
             }
         })
     }
+    //上面的函数执行之后，就从数据库中取出所有的 branch, 将每条 branch 的信息显示在页面上。
 </script>
 </body>
 </html>
