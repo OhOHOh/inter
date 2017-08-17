@@ -15,5 +15,9 @@ data2 = [{
         'lastCompile': '2030-10-1',
         'lastRun': '2030-10-3',
     }]
+data3 = json.dumps(data2)  #无法操作了
 print(data2)
-print(json.dumps(data2))
+print(data2[0])
+print(data2[0]['branchName'])
+print(data3)
+print(data3[0])

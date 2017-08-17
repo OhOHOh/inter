@@ -156,7 +156,6 @@ def apiLogin(request):
 
     return render(request, 'test1/login.html')
 
-
 @csrf_exempt
 def tryConnect(request):
     """
@@ -176,7 +175,6 @@ def tryConnect(request):
             print('connect success')
             return HttpResponse('1')
     return render(request, 'test1/connect.html')
-
 
 @csrf_exempt
 def makeJson(request):
@@ -208,3 +206,21 @@ def makeJson(request):
             print("确认是你，返回json数据")
             return HttpResponse(json.dumps(data))
     return HttpResponse(json.dumps(data))
+
+@csrf_exempt
+def displayJson(request):
+    '''
+    访问地址：/test1/api/displayjson
+    当 buildbranch.html 界面获取到来自 TestMaster 的json数据时, 将数据传到此处，再将数据传到网页!就可以使用 Django 的模板文法
+    (学艺不精，无法在html界面中直接用JS来循环布局, 只能采取这种方式, 希望以后能改进!)
+    :param request:
+    :return:
+    '''
+    if request.method == 'POST':
+        data = request.POST.get('dataObject')
+        print(data)
+        print(json.dumps(data))
+        return HttpResponse({
+            'datajson': json.dumps(data)
+        })
+

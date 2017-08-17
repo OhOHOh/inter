@@ -152,6 +152,13 @@
 
 <br/>
 
+<div id="accordion">
+    {% for foo in datajson %}
+    
+    {% endfor %}
+    
+</div>
+
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script>
@@ -168,10 +175,18 @@
                 data: {'getbranch': 'helloTestMaster'},
                 // dataType: 'json',
 
-                success: function (data) {  //data是JSON数据
+                success: function (data) {  //data是JSON数据, 的字符串
                     alert("成功地从TestMaster处获取每个branch的信息, 将每条 branch 的信息显示在页面上");
                     console.log('先看看从后台穿过来的原始数据:    ' + data);
-                    var dataObject = JSON.parse(data); // 这句有问题!!!
+                    let dataObject = JSON.parse(data); //dataObject才是网页可用的
+
+                    $.ajax({
+                        url: "/test1/api/displayjson/",
+                        async: true,
+                        type: 'POST',
+                        data: {'dataObject': data}
+                    });
+
                     console.log("之后的事情呢？");
                     console.log(dataObject);
                     console.log(dataObject[0]['branchName']);
