@@ -8,6 +8,7 @@
       <w>errortext</w>
       <w>getbranch</w>
       <w>getdata</w>
+      <w>makejson</w>
       <w>mysite</w>
       <w>navbar</w>
       <w>ondragstart</w>

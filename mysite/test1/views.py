@@ -86,6 +86,7 @@ def buildbranch(request):
             'patch': testpatch,
         }
         print(testset)
+        print(context['address'])
         return render(request, 'test1/buildbranch.html', context)
 
         # return render(request, 'test1/buildbranch.html', context)
@@ -185,22 +186,25 @@ def makeJson(request):
     :param request:
     :return:
     '''
+    print("调用views中的makeJson函数")
+    data = [{
+        'branchName': 'testBranchName1',
+        'compileTimes': 100,
+        'runTimes': 100,
+        'lastCompile': '2020-10-1',
+        'lastRun': '2020-10-3',
+    },
+        {
+            'branchName': 'develop',
+            'compileTimes': 200,
+            'runTimes': 200,
+            'lastCompile': '2030-10-1',
+            'lastRun': '2030-10-3',
+        }]
     if request.method == 'POST':
         message = request.POST.get('getbranch')
         if message == 'helloTestMaster':  # 是 buildbranch.html 界面中的 AJAX 发来的信息
             # 生成一个 JSON 数据,JSON 中的 key 暂定为 branchName, compileTimes, runTimes, lastCompile, lastRun
-            data = [{
-                'branchName': 'testBranchName1',
-                'compileTimes': 100,
-                'runTimes': 100,
-                'lastCompile': '2020-10-1',
-                'lastRun': '2020-10-3',
-            },
-                {
-                    'branchName': 'develop',
-                    'compileTimes': 200,
-                    'runTimes': 200,
-                    'lastCompile': '2030-10-1',
-                    'lastRun': '2030-10-3',
-                }]
+            print("确认是你，返回json数据")
             return HttpResponse(json.dumps(data))
+    return HttpResponse(json.dumps(data))

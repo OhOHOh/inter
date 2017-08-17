@@ -78,7 +78,7 @@
         }
         <!-- 用于测试连接 TestMaster 的函数 -->
         function connectTestMaster() {
-            x = document.getElementById("testbranch");
+            x = document.getElementById("testaddress");
             var val = x.value;
 
             // 进行 TestMaster 的连接:
@@ -97,6 +97,9 @@
                     else {
                         alert("TestMaster连接失败！");
                     }
+                },
+                error: function () {
+                    alert("TestMaster连接失败!");
                 }
             });
         }
@@ -169,9 +172,9 @@
     {% csrf_token %}
     <!-- TestMaster 地址, type="url" -->
     <div class="form-group">
-        <label for="testbranch" class="col-sm-2 control-label">测试地址</label>
+        <label for="testaddress" class="col-sm-2 control-label">测试地址</label>
         <div class="col-sm-9">
-            <input type="text" class="form-control" id="testbranch" name="testaddress233" placeholder="input TestMaster IP" required>
+            <input type="text" class="form-control" id="testaddress" name="testaddress233" placeholder="input TestMaster IP" required>
         </div>
     </div>
 
