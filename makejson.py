@@ -1,4 +1,4 @@
-import json
+import json, requests
 
 data1 = [{'branchName1': 'master', 'age': 16}, {'branchName2': 'develop', 'age': 20}]
 data2 = [{
@@ -16,8 +16,13 @@ data2 = [{
         'lastRun': '2030-10-3',
     }]
 data3 = json.dumps(data2)  #无法操作了
-print(data2)
-print(data2[0])
-print(data2[0]['branchName'])
-print(data3)
-print(data3[0])
+# print(data2)
+# print(data2[0])
+# print(data2[0]['branchName'])
+# print(data3)
+# print(data3[0])
+
+r = requests.get('http://127.0.0.1:8000/test1/api/makejson/')
+data = r.json()
+print(data)
+print(data[0]['branchName'])

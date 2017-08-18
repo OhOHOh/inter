@@ -13,11 +13,9 @@
     <!-- Bootstrap -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.12.4.js">
-        var jQuery_New = $.noConflict(true);
-    </script>
-    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+    <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
     <!-- JS函数 -->
     <script>
@@ -33,6 +31,7 @@
             $(document).ready(function () {
                 $(id).css('background', 'url("{% static "images/loading.gif" %}") no-repeat')
             });
+            alert('设置一个 AJAX 函数, 先发送编译命令给 TM, 然后接受 TM 返回的信息, 根据编译结果的成功与否来显示不同的信息');
         }
         <!-- 开始 按钮的点击响应 -->
         function click667(id) {
@@ -79,7 +78,7 @@
     </style>
 
 </head>
-<body onload="getBranchInfoFromTM();"> <!-- onload="getDataFromTM(id='table1')" -->
+<body> <!-- onload="getDataFromTM(id='table1')" -->
 
 {#<script src="{% static 'test1/mysite_buildbranch.js' %}"></script>#}
 
@@ -105,7 +104,6 @@
         </div>
     </div>
 </nav>
-
 
 <!-- 主体 -->
 <div id="accordion">
@@ -148,55 +146,87 @@
             suscipit faucibus urna.
         </p>
     </div>
+
+    {% for branchInfo in branchfromTM %}
+        <h3>
+            <span id="branchName">{{ branchInfo.branchName }}</span>
+            <button onclick="click666(this)" class="button_compile"></button>
+            <button onclick="click667(this)" class="button_start"></button>
+            <span>{{ set }}</span>
+        </h3>
+        <div><!-- accordion 使用 -->
+            <div class="col-sm-12 col-md-12 main">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="table1">
+                        <thead> <!-- 表格的表头 -->
+                        <tr>
+                            <th>编译次数</th>
+                            <th>Last Build</th>
+                            <th>运行次数</th>
+                            <th>Last Run</th>
+                        </tr>
+                        </thead>
+                        <tbody><!-- 表格的内容 -->
+                        <!-- 从 TestMaster 那边传递数据过来 -->
+                        <td>{{ branchInfo.compileTimes }}</td>
+                        <td>{{ branchInfo.lastCompile }}</td>
+                        <td>{{ branchInfo.runTimes }}</td>
+                        <td>{{ branchInfo.lastRun }}</td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 </div>
 
 <br/>
+<br/>
+<br/>
 
-<div id="accordion">
-    {% for foo in datajson %}
-    
-    {% endfor %}
-    
-</div>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script>
     <!-- AJAX -->
-        function getBranchInfoFromTM() { //在页面加载之后触发执行
-            // alert('页面加载完就执行这个函数'); '成功执行!'
-            // alert('{{ address }}:8000/test1/api/makejson/');
-            //向 TestMaster 发送请求, 获取数据：（branch名称、编译次数、运行次数、last_compile、last_run）每个branch都有5个数据
-            // JSON 中的 key 暂定为 branchName, compileTimes, runTimes, lastCompile, lastRun
-            $.ajax({
-                url: "/test1/api/makejson/", // 访问 TestMaster 的 REST API 的地址
-                async: false,   // 同步AJAX，等待 TM 返回 branchName
-                type: 'POST',
-                data: {'getbranch': 'helloTestMaster'},
-                // dataType: 'json',
+    function getBranchInfoFromTM() { //在页面加载之后触发执行
+        // alert('页面加载完就执行这个函数'); '成功执行!'
+        // alert('{{ address }}:8000/test1/api/makejson/');
+        //向 TestMaster 发送请求, 获取数据：（branch名称、编译次数、运行次数、last_compile、last_run）每个branch都有5个数据
+        // JSON 中的 key 暂定为 branchName, compileTimes, runTimes, lastCompile, lastRun
+        $.ajax({
+            url: "/test1/api/makejson/", // 访问 TestMaster 的 REST API 的地址{{ address }}, 当前为测试 api
+            async: false,   // 同步AJAX，等待 TM 返回 branchName
+            type: 'POST',
+            data: {'getbranch': 'helloTestMaster'},
+            // dataType: 'json',
 
-                success: function (data) {  //data是JSON数据, 的字符串
-                    alert("成功地从TestMaster处获取每个branch的信息, 将每条 branch 的信息显示在页面上");
-                    console.log('先看看从后台穿过来的原始数据:    ' + data);
-                    let dataObject = JSON.parse(data); //dataObject才是网页可用的
+            success: function (data) {  //data是JSON数据, 的字符串
+                alert("成功地从TestMaster处获取每个branch的信息, 将每条 branch 的信息显示在页面上");
+                console.log('先看看从TestMaster传过来的原始数据 dumps(...) :    ' + data);
+                let dataObject = JSON.parse(data); //dataObject才是网页可用的
 
-                    $.ajax({
-                        url: "/test1/api/displayjson/",
-                        async: true,
-                        type: 'POST',
-                        data: {'dataObject': data}
-                    });
+                $.ajax({
+                    url: "/test1/api/displayjson/",
+                    async: true,
+                    type: 'POST',
+                    data: {'dataObject': data},
 
-                    console.log("之后的事情呢？");
-                    console.log(dataObject);
-                    console.log(dataObject[0]['branchName']);
-                },
-                error: function () {
-                    alert('error!');
-                }
-            })
-        }
-        //上面的函数执行之后，就从数据库中取出所有的 branch, 将每条 branch 的信息显示在页面上。
+                    success: function (data1) {
+                        console.log('第2次返回的数据：    ' + data1);
+                    }
+                });
+
+                console.log("之后的事情呢？");
+                console.log(dataObject);
+                console.log(dataObject[0]['branchName']);
+            },
+            error: function () {  //test
+                alert('error!');
+            }
+        })
+    }
+    //上面的函数执行之后，就从数据库中取出所有的 branch, 将每条 branch 的信息显示在页面上。
 </script>
 
 </body>

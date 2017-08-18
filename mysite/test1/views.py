@@ -3,6 +3,7 @@ from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
+import requests
 
 from .models import Testset, UserLogin, BranchInfo
 from django import forms
@@ -64,55 +65,39 @@ def connect(request):
 # ex: test1/buildbranch/
 def buildbranch(request):
     """
-    从 connect.html 界面上传过来的表单数据, 将其中的 测试集名称显示在本页面( buildbranch.html )上
+    首先, 接受从 connect.html 界面上传过来的表单数据, 将其中的 测试集名称显示在本页面( buildbranch.html )上
+    第二, 使用 requests 来从 TestMaster 中获取 BranchInfo 的信息, 返回JSON 中的 key 暂定为 branchName, compileTimes, runTimes, lastCompile, lastRun 这5个
+        并将 JSON 数据封装在 context 中, 一起渲染 buildbranch.html
     :param request:
     :return:
     """
+    print('进入 buildbranch 函数')
     try:
         testaddress = request.POST['testaddress233']
         testset = request.POST['testset233']
         testpatch = request.POST['testpatch233']
     except(KeyError):
-        context = {'error_message': "Not find the TestMaster"}
+        context = {'error_message': "表单中的<input>中name属性设置的不匹配或者表单信息没有填写完整"}
         return fail(request, context)  # 将'失败'后返回的'失败界面'并显示'失败信息' 的行为封装成一个独立的函数 fail
-        # return render(request, 'test1/fail.html', {
-        #     'error_message': "Not find the TestMaster"
-        # })
     else:
+        url = 'http://' + testaddress + ':8000/test1/api/makejson/'  # 最后的　/ 要记得添加！
+        print(url)
+        r = requests.get(url) # 从 TestMaster 的 REST API 中获取 JSON 数据
+        data = r.json()
+        print(data)
+        print(data[0]['branchName'])
         context = {
             'welcome': "Welcome to test1/views.build",
             'address': testaddress,
             'set': testset[:-2],  # 删去最后2个字符 ', '
             'patch': testpatch,
+            'branchfromTM': data,
         }
-        print(testset)
-        print(context['address'])
+        print('表单传过来的测试集:  ' + testset)
+        print('表单传过来的ip地址:  ' + context['address'])
         return render(request, 'test1/buildbranch.html', context)
 
-        # return render(request, 'test1/buildbranch.html', context)
 
-
-# ex: test1/machines/   由branch页面提交表单后跳转过来
-# def machines(request):
-#     # 从request中获取各个机器的运行状态, request中有 机器的测试编号, 运行时间, 运行状态, 运行距离等
-#     # 如何从 request 中获取这些数据? 并封装成字典的形式?
-#     try:
-#         testbranch = request.POST['testaddress233']   # name 属性
-#         testset = request.POST['testset233']
-#         testpatch = request.POST['testpatch233']
-#     except(KeyError):
-#         return render(request, 'test1/connect.html', {
-#             'error_message': "You didn't type the email or password.",
-#         })
-#     else:
-#         context = {
-#             'branch': testbranch,
-#             'set': testset,
-#             'patch': testpatch,
-#             'welcome': "Welcome to test1/views.Machines",
-#             'range': range(1, 16),
-#         }
-#         return render(request, 'test1/machines.html', context)
 def machines(request):
     context = {
         'welcome': "Welcome to test1/views.machines",
@@ -193,34 +178,29 @@ def makeJson(request):
         'lastRun': '2020-10-3',
     },
         {
-            'branchName': 'develop',
+            'branchName': 'testBranchName2',
             'compileTimes': 200,
             'runTimes': 200,
             'lastCompile': '2030-10-1',
             'lastRun': '2030-10-3',
         }]
-    if request.method == 'POST':
-        message = request.POST.get('getbranch')
-        if message == 'helloTestMaster':  # 是 buildbranch.html 界面中的 AJAX 发来的信息
-            # 生成一个 JSON 数据,JSON 中的 key 暂定为 branchName, compileTimes, runTimes, lastCompile, lastRun
-            print("确认是你，返回json数据")
-            return HttpResponse(json.dumps(data))
     return HttpResponse(json.dumps(data))
 
 @csrf_exempt
 def displayJson(request):
-    '''
+    ''' 弃用！！！
     访问地址：/test1/api/displayjson
     当 buildbranch.html 界面获取到来自 TestMaster 的json数据时, 将数据传到此处，再将数据传到网页!就可以使用 Django 的模板文法
-    (学艺不精，无法在html界面中直接用JS来循环布局, 只能采取这种方式, 希望以后能改进!)
+    (学艺不精，无法在html界面中直接用JS来循环访问数组的布局, 只能采取这种方式, 希望以后能改进!)
     :param request:
     :return:
     '''
+    print('displayJson函数已经开始访问')
     if request.method == 'POST':
         data = request.POST.get('dataObject')
         print(data)
         print(json.dumps(data))
-        return HttpResponse({
+        return render(request, 'test1/buildbranch.html', {
             'datajson': json.dumps(data)
         })
-
+        #return HttpResponse(data)
