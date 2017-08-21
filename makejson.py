@@ -22,7 +22,8 @@ data3 = json.dumps(data2)  #无法操作了
 # print(data3)
 # print(data3[0])
 
-r = requests.get('http://127.0.0.1:8000/test1/api/makejson/')
+r = requests.get('http://127.0.0.1:8000/test1/api/makemachinejson/')
 data = r.json()
 print(data)
-print(data[0]['branchName'])
+print(r.headers)
+# print(data[0]['branchName'])

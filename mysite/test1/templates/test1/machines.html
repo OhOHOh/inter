@@ -118,17 +118,6 @@
 
 <div class="container-fluid">
     <div class="row">
-
-        {#        <!--侧边栏-->#}
-        {#        <div class="col-sm-2 col-md-2 sidebar">#}
-        {#            <ul class="nav nav-sidebar">#}
-        {#                <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>#}
-        {#                {% for i in range %}#}
-        {#                    <li><a href="#M{{ i }}">M{{ i }}</a></li>#}
-        {#                {% endfor %}#}
-        {#            </ul>#}
-        {#        </div>#}
-
         <!-- 表格 -->
         <div class="col-sm-12 col-md-12 main">
             {#            <h2 class="sub-header">Machine Info</h2>#}
@@ -143,7 +132,7 @@
                         <th>运行距离</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody> <!-- 表格的内容 -->
                     <tr class="danger" id="M1">
                         <td>1,001</td>
                         <td>Lorem</td>

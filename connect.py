@@ -1,4 +1,4 @@
-import telnetlib
+import telnetlib, requests
 
 print('start')
 
@@ -9,6 +9,13 @@ except:
     print('connect fail')
 else:
     print('connect success')
-
 print('end')
+
+try:
+    r = requests.get('http://127.0.0.1:8000')
+except:
+    print('连接失败')
+else:
+    if r.status_code == requests.codes.ok:
+        print('连接成功')
 

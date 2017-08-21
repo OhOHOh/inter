@@ -21,17 +21,53 @@
     <script>
         $(function () {
             $("#accordion").accordion({
-                collapsible: true,
+                //  collapsible: true,
                 heightStyle: "content"
             });
         });
         <!--编译按钮的点击响应 -->
         function click666(id) {
-            alert('click!');
             $(document).ready(function () {
-                $(id).css('background', 'url("{% static "images/loading.gif" %}") no-repeat')
+                alert('编译指令已经发送，请等待编译结果');
+                $(id).css('background', 'url("{% static "images/loading.gif" %}") no-repeat');
+                $(id).attr("disabled", true); // 按钮不可点击
             });
-            alert('设置一个 AJAX 函数, 先发送编译命令给 TM, 然后接受 TM 返回的信息, 根据编译结果的成功与否来显示不同的信息');
+            // console.log("生成编译结果的API地址为:  {{ address }}/test1/api/makecompileresult/");
+            // alert('设置一个 AJAX 函数, 先发送编译命令给 TM, 然后接受 TM 返回的信息, 根据编译结果的成功与否来显示不同的信息');
+
+            let branchName = $(id).prev().text(); // 需要把 branchName 送给 TM
+            $.ajax({
+                url: "/test1/api/makecompileresult/",     // TM 那边的 API 接口
+                async: true,                           // 同步AJAX，等待 TM 返回 编译的结果
+                data: {'command': 'compile commid', 'branchName': branchName},    //编译指令, 要修改的!!!
+                dataType: 'json',                       // 编译返回的结果的格式是 JSON, 具体的格式还要再协商
+
+                success: function (data) {  //从 TestMaster 返回的数据也是 JSON, 具体的格式还要再协商, 暂定：{'result': '...', 'error': '...'}
+                    if (data['result'] === 'success') {
+                        alert('编译成功！');
+                        console.log('编译成功');
+                        $(document).ready(function () {
+                            $(id).css('background', 'url("{% static "images/settings.png" %}") no-repeat');
+                            $(id).attr("disabled", false);
+
+                            $(id).next().next().next().css("background-color", '#C1FFE4');
+                            $(id).next().next().next().text(' 编译成功');
+                        });
+                    } else {
+                        alert('编译失败！返回的 error code 在log中');
+                        console.log('编译失败！！！');
+                        console.log('error code:  '+data['error']);
+                        $(document).ready(function () {
+                            $(id).css('background', 'url("{% static "images/settings.png" %}") no-repeat');
+                            $(id).attr("disabled", false);
+
+                            $(id).next().next().next().css("background-color", '#FF9797');
+                            $(id).next().next().next().text(' 编译失败');
+                        });
+                    }
+                }
+
+            })
         }
         <!-- 开始 按钮的点击响应 -->
         function click667(id) {
@@ -153,6 +189,7 @@
             <button onclick="click666(this)" class="button_compile"></button>
             <button onclick="click667(this)" class="button_start"></button>
             <span>{{ set }}</span>
+            <span id="compileresult"></span>
         </h3>
         <div><!-- accordion 使用 -->
             <div class="col-sm-12 col-md-12 main">
@@ -184,12 +221,13 @@
 <br/>
 <br/>
 
+<h3 style="background-color: #2aabd2" class="testparent">fdsafdsaf</h3>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script>
     <!-- AJAX -->
-    function getBranchInfoFromTM() { //在页面加载之后触发执行
+    function getBranchInfoFromTM() { //在页面加载之后触发执行                     弃用！！！从后台根据IP地址获取JSON数据
         // alert('页面加载完就执行这个函数'); '成功执行!'
         // alert('{{ address }}:8000/test1/api/makejson/');
         //向 TestMaster 发送请求, 获取数据：（branch名称、编译次数、运行次数、last_compile、last_run）每个branch都有5个数据

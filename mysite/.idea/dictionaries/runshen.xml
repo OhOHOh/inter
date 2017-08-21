@@ -1,6 +1,7 @@
 <component name="ProjectDictionaryState">
   <dictionary name="runshen">
     <words>
+      <w>apitest</w>
       <w>bootcss</w>
       <w>buildbranch</w>
       <w>displayjson</w>
@@ -9,7 +10,9 @@
       <w>errortext</w>
       <w>getbranch</w>
       <w>getdata</w>
+      <w>makecompileresult</w>
       <w>makejson</w>
+      <w>makemachinejson</w>
       <w>mysite</w>
       <w>navbar</w>
       <w>ondragstart</w>

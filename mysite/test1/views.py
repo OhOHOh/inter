@@ -80,7 +80,7 @@ def buildbranch(request):
         context = {'error_message': "表单中的<input>中name属性设置的不匹配或者表单信息没有填写完整"}
         return fail(request, context)  # 将'失败'后返回的'失败界面'并显示'失败信息' 的行为封装成一个独立的函数 fail
     else:
-        url = 'http://' + testaddress + ':8000/test1/api/makejson/'  # 最后的　/ 要记得添加！
+        url = 'http://' + testaddress + '/test1/api/makebranchjson/'  # 最后的　/ 要记得添加！
         print(url)
         r = requests.get(url) # 从 TestMaster 的 REST API 中获取 JSON 数据
         data = r.json()
@@ -99,6 +99,11 @@ def buildbranch(request):
 
 
 def machines(request):
+    '''
+    在 buildbranch/html 中点击 "运行" 按钮, 转到这个地址, 也要从 TestMaster 中获取机器的运行情况
+    :param request:
+    :return:
+    '''
     context = {
         'welcome': "Welcome to test1/views.machines",
         'range': range(1, 16),
@@ -144,63 +149,31 @@ def apiLogin(request):
 @csrf_exempt
 def tryConnect(request):
     """
-    通过访问 url: test1/api/connect/ 来获取函数的执行
+    通过访问 url: test1/api/connect/ 来获取函数的执行, 测试地址里填写的只是 IP 地址
     在页面 connect.html 中的 connectTestMaster 函数中引用的 API
     :return:
     """
-    if request.method == 'POST':
+    # if request.method == 'POST':
+    #     ip = request.POST.get('ip')
+    #     print(ip)
+    #     try:
+    #         telnetlib.Telnet(ip, port='8000', timeout=20)
+    #     except:
+    #         print('connect fail')
+    #         return HttpResponse('0')
+    #     else:
+    #         print('connect success')
+    #         return HttpResponse('1')
+    if request.method == 'POST':  # 测试地址里填写的是 IP + port
         ip = request.POST.get('ip')
-        print(ip)
+        url = 'http://' + ip
         try:
-            telnetlib.Telnet(ip, port='8000', timeout=20)
+            r = requests.get(url)
         except:
             print('connect fail')
             return HttpResponse('0')
         else:
-            print('connect success')
-            return HttpResponse('1')
+            if r.status_code == requests.codes.ok:
+                print('connect success')
+                return HttpResponse('1')
     return render(request, 'test1/connect.html')
-
-@csrf_exempt
-def makeJson(request):
-    '''
-    访问地址： test1/api/makejson/
-    用于生成一个 JSON 数据，模拟 TestMaster 返回的 branch 的信息
-    :param request:
-    :return:
-    '''
-    print("调用views中的makeJson函数")
-    data = [{
-        'branchName': 'testBranchName1',
-        'compileTimes': 100,
-        'runTimes': 100,
-        'lastCompile': '2020-10-1',
-        'lastRun': '2020-10-3',
-    },
-        {
-            'branchName': 'testBranchName2',
-            'compileTimes': 200,
-            'runTimes': 200,
-            'lastCompile': '2030-10-1',
-            'lastRun': '2030-10-3',
-        }]
-    return HttpResponse(json.dumps(data))
-
-@csrf_exempt
-def displayJson(request):
-    ''' 弃用！！！
-    访问地址：/test1/api/displayjson
-    当 buildbranch.html 界面获取到来自 TestMaster 的json数据时, 将数据传到此处，再将数据传到网页!就可以使用 Django 的模板文法
-    (学艺不精，无法在html界面中直接用JS来循环访问数组的布局, 只能采取这种方式, 希望以后能改进!)
-    :param request:
-    :return:
-    '''
-    print('displayJson函数已经开始访问')
-    if request.method == 'POST':
-        data = request.POST.get('dataObject')
-        print(data)
-        print(json.dumps(data))
-        return render(request, 'test1/buildbranch.html', {
-            'datajson': json.dumps(data)
-        })
-        #return HttpResponse(data)
