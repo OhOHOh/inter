@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^api/login/$', views.apiLogin),
     url(r'^api/connecting/$', views.tryConnect),
 
+
     # test API ,用于生成 JSON 数据做一个测试，模拟 TestMaster 返回的 branch 的信息
     url(r'^api/makebranchjson/$', apitest.makeBranchJson),
     url(r'^api/makemachinejson/$', apitest.makeMachineJson),

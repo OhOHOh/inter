@@ -24,4 +24,6 @@ urlpatterns = [
 
     url(r'^$', test1_views.login),
     url(r'^test1/', include('test1.urls')),
+
+    url(r'^api/v1/$', test1_views.connectserver),
 ]

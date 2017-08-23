@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>wsgi test</title>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+
+    <script>
+        function ping() {
+            // alert('click!');
+            x = document.getElementById('url');
+            url = x.value;
+            console.log(x.value);
+
+            $.ajax({
+                url: x.value,
+                type: 'GET',
+
+                <!-- 服务器成功返回数据 data -->
+                success: function (data) {
+                    y = document.getElementById('content');
+                    y.innerHTML = data;
+                },
+                error: function () {
+                    y = document.getElementById('content');
+                    y.innerHTML = '服务器连接失败';
+                }
+            })
+
+        }
+    </script>
+
+</head>
+<body>
+<h1>{{ welcome }}</h1>
+
+<input id="url" type="text" style="width: 30%;height: 20px;" />
+<button id="test1" style="font-size: medium" onclick="ping();">PING</button>
+
+<br /><br />
+<textarea id="content" style="width: 70%;height: 100px">dfasdfasdga</textarea>
+<br />
+
+
+
+</body>
+</html>

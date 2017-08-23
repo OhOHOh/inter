@@ -149,7 +149,7 @@ def apiLogin(request):
 @csrf_exempt
 def tryConnect(request):
     """
-    通过访问 url: test1/api/connect/ 来获取函数的执行, 测试地址里填写的只是 IP 地址
+    通过访问 url: test1/api/connect/ 来获取函数的执行, 测试地址里填写的是 IP+PORT
     在页面 connect.html 中的 connectTestMaster 函数中引用的 API
     :return:
     """
@@ -177,3 +177,17 @@ def tryConnect(request):
                 print('connect success')
                 return HttpResponse('1')
     return render(request, 'test1/connect.html')
+
+
+
+
+def connectserver(request): #162
+    print('connectser')
+    url = 'http://10.0.169.203:8070/api/v1/hello/'
+    r = requests.get(url)
+    data = r.text
+    context = {
+        'welcome': "Welcome to wsgi test",
+    }
+    # return HttpResponse(data)
+    return render(request, 'test1/wsgi.html', context)
