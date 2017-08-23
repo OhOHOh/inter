@@ -31,8 +31,7 @@
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
     <script>
-        <!--
-        AJAX -->
+        <!--AJAX -->
         function showHint(id) {
             if (id.value.length === 0) {
                 $(document).ready(function () {
@@ -41,7 +40,7 @@
                 return;
             }
             $.ajax({
-                url: "/test1/api/login/",
+                url: "{% url 'apilogin' %}",
                 type: 'POST',
                 data: {'username': $(id).val()},
 

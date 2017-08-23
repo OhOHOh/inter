@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'login',
     'cis',
+    'sts',
 ]
 
 MIDDLEWARE = [

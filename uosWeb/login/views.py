@@ -17,6 +17,7 @@ class UserLoginForm(forms.Form):
 # 最初进入网点, 进行密码登录
 def login(request):
     if request.method == 'POST':
+        print('开始views.login函数')
         uf = UserLoginForm(request.POST)
         if uf.is_valid():
             # 获取表单密码
@@ -26,7 +27,9 @@ def login(request):
             user = UserLogin.objects.filter(username__exact=username, password__exact=password)
             if user:
                 # return render(request, 'test1/index.html', context)
-                return HttpResponseRedirect(reverse('login'))
+                # return HttpResponseRedirect(reverse('login'))
+                print('密码成功！')
+                return afterLogin(request)
             else:
                 return render(request, 'login.html', {
                     'welcome': "Welcome to test1/views.login",
@@ -36,6 +39,15 @@ def login(request):
         uf = UserLoginForm()
         return render(request, 'login.html', {'uf': uf})
 
+
+def afterLogin(request):
+    '''
+    登录成功之后, 原来页面的信息变成显示当前能够选择的服务的一个列表, 同一个网址！
+    :param request:
+    :return:
+    '''
+    print('调用了 afterLogin 函数')
+    return render(request, 'afterLogin.html')
 
 
 # API 接口函数

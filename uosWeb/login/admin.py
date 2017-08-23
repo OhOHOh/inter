@@ -3,4 +3,7 @@ from .models import UserLogin
 
 # Register your models here.
 
-admin.site.register(UserLogin)
+class UserLoginAdmin(admin.ModelAdmin):
+    list_display = ('username', 'password')
+
+admin.site.register(UserLogin, UserLoginAdmin)
