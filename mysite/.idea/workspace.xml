@@ -56,21 +56,21 @@
       <file leaf-file-name="buildbranch.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test1/templates/test1/buildbranch.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
-              <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+            <state relative-caret-position="210">
+              <caret line="52" column="8" lean-forward="true" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test1/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="152" column="44" lean-forward="true" selection-start-line="152" selection-start-column="44" selection-end-line="152" selection-end-column="44" />
+            <state relative-caret-position="-1820">
+              <caret line="76" column="44" lean-forward="true" selection-start-line="76" selection-start-column="44" selection-end-line="76" selection-end-column="44" />
               <folding>
                 <element signature="e#0#55#0" expanded="true" />
-                <element signature="e#4667#4697#0" expanded="false" />
+                <element signature="e#4668#4698#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -86,10 +86,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="connect.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="connect.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test1/templates/test1/connect.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
+            <state relative-caret-position="525">
               <caret line="94" column="49" lean-forward="true" selection-start-line="94" selection-start-column="49" selection-end-line="94" selection-end-column="49" />
               <folding />
             </state>
@@ -205,11 +205,11 @@
         <option value="$PROJECT_DIR$/test1/templates/test1/wsgi.html" />
         <option value="$PROJECT_DIR$/test1/urls.py" />
         <option value="$PROJECT_DIR$/static/css/signin.css" />
-        <option value="$PROJECT_DIR$/test1/views.py" />
         <option value="$PROJECT_DIR$/../connect.py" />
         <option value="$PROJECT_DIR$/test1/templates/test1/ping.html" />
         <option value="$PROJECT_DIR$/mysite/urls.py" />
         <option value="$PROJECT_DIR$/test1/templates/test1/connect.html" />
+        <option value="$PROJECT_DIR$/test1/views.py" />
       </list>
     </option>
   </component>
@@ -951,14 +951,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/css/signin.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="1" lean-forward="false" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../connect.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
@@ -979,6 +971,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test1/templates/test1/connect.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="94" column="49" lean-forward="true" selection-start-line="94" selection-start-column="49" selection-end-line="94" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/signin.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="1" lean-forward="false" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test1/templates/test1/buildbranch.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="52" column="8" lean-forward="true" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mysite/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -991,28 +1007,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test1/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="152" column="44" lean-forward="true" selection-start-line="152" selection-start-column="44" selection-end-line="152" selection-end-column="44" />
+        <state relative-caret-position="-1820">
+          <caret line="76" column="44" lean-forward="true" selection-start-line="76" selection-start-column="44" selection-end-line="76" selection-end-column="44" />
           <folding>
             <element signature="e#0#55#0" expanded="true" />
-            <element signature="e#4667#4697#0" expanded="false" />
+            <element signature="e#4668#4698#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test1/templates/test1/buildbranch.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test1/templates/test1/connect.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="94" column="49" lean-forward="true" selection-start-line="94" selection-start-column="49" selection-end-line="94" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>

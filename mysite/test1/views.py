@@ -150,7 +150,7 @@ def apiLogin(request):
 def tryConnect(request):
     """
     通过访问 url: test1/api/connect/ 来获取函数的执行, 测试地址里填写的是 IP+PORT
-    在页面 connect.html 中的 connectTestMaster 函数中引用的 API
+    在页面 connect.html 中的 connectTestMaster 函数`中引用的 API
     :return:
     """
     # if request.method == 'POST':

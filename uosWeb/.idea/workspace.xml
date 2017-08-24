@@ -18,8 +18,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sts/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="8" column="29" lean-forward="false" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
+            <state relative-caret-position="147">
+              <caret line="7" column="30" lean-forward="false" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -30,12 +30,22 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sts/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
-              <caret line="66" column="36" lean-forward="true" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
+            <state relative-caret-position="464">
+              <caret line="40" column="13" lean-forward="true" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
-                <element signature="e#1007#1037#0" expanded="false" />
+                <element signature="e#1866#1896#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fail.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sts/templates/sts/fail.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="12" column="18" lean-forward="true" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -53,10 +63,22 @@
       <file leaf-file-name="branch.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sts/templates/sts/branch.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
+            <state relative-caret-position="465">
               <caret line="37" column="17" lean-forward="true" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
               <folding>
                 <element signature="e#1582#3312#0#DjangoTemplate" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sts/templates/sts/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="380">
+              <caret line="77" column="48" lean-forward="false" selection-start-line="77" selection-start-column="48" selection-end-line="77" selection-end-column="53" />
+              <folding>
+                <element signature="e#3080#3277#0#DjangoTemplate" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -95,8 +117,9 @@
         <option value="$PROJECT_DIR$/login/templates/login/afterLogin.html" />
         <option value="$PROJECT_DIR$/static/css/signin.css" />
         <option value="$PROJECT_DIR$/sts/urls.py" />
-        <option value="$PROJECT_DIR$/sts/views.py" />
         <option value="$PROJECT_DIR$/sts/templates/sts/index.html" />
+        <option value="$PROJECT_DIR$/sts/templates/sts/fail.html" />
+        <option value="$PROJECT_DIR$/sts/views.py" />
       </list>
     </option>
   </component>
@@ -499,7 +522,7 @@
           <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
-            <element signature="e#1007#1037#0" expanded="false" />
+            <element signature="e#1866#1896#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -681,26 +704,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sts/templates/sts/branch.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="37" column="17" lean-forward="true" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
-          <folding>
-            <element signature="e#1582#3312#0#DjangoTemplate" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sts/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="29" lean-forward="false" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sts/templates/sts/connect.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1638">
@@ -717,23 +720,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sts/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="30" lean-forward="false" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sts/templates/sts/branch.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="37" column="17" lean-forward="true" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
+          <folding>
+            <element signature="e#1582#3312#0#DjangoTemplate" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sts/templates/sts/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="64" column="13" lean-forward="true" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="13" />
+        <state relative-caret-position="380">
+          <caret line="77" column="48" lean-forward="false" selection-start-line="77" selection-start-column="48" selection-end-line="77" selection-end-column="53" />
           <folding>
             <element signature="e#3080#3277#0#DjangoTemplate" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sts/templates/sts/fail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="12" column="18" lean-forward="true" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sts/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="66" column="36" lean-forward="true" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
+        <state relative-caret-position="464">
+          <caret line="40" column="13" lean-forward="true" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
-            <element signature="e#1007#1037#0" expanded="false" />
+            <element signature="e#1866#1896#0" expanded="false" />
           </folding>
         </state>
       </provider>

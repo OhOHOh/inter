@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>出错界面</title>
+</head>
+<body>
+
+<h1>{{ error_message }}</h1>
+
+{% if url %}
+    <h2>访问地址为： {{ url }}</h2>
+    <p>是否有误请检查</p>
+{% endif %}
+
+</body>
+</html>
