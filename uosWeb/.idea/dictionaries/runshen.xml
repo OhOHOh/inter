@@ -1,6 +1,7 @@
 <component name="ProjectDictionaryState">
   <dictionary name="runshen">
     <words>
+      <w>addon</w>
       <w>apilogin</w>
       <w>backends</w>
       <w>clickjacking</w>
@@ -8,8 +9,10 @@
       <w>howto</w>
       <w>indextest</w>
       <w>lconf</w>
+      <w>murl</w>
       <w>sqlite</w>
       <w>startproject</w>
+      <w>tryconnect</w>
       <w>wsgi</w>
     </words>
   </dictionary>

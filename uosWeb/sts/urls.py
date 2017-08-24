@@ -7,4 +7,6 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^branch/$', views.branch, name='branch'),
     url(r'^connect/$', views.connect, name='connect'),
+
+    url(r'^api/tryconnect/$', views.tryConnect, name='tryconnect'),
 ]
