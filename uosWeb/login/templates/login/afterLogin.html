@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>初始选择界面</title>
+
+    <style>
+        div#authorization_box {
+            position: fixed;
+            z-index: 9999;
+            font-size: 30px;
+            top: 50%;
+            left: 50%;
+            width: 550px; /* 按需改变数值 */
+            height: 150px; /* 按需改变数值 */
+            margin-top: -75px; /* height数值的一半 */
+            margin-left: -200px; /* width数值的一半 */
+        }
+    </style>
+
+    <script>
+        function ClickCIS() {
+            alert("send message to TestMaster to acquire the running information of CIS");
+        }
+    </script>
+
+</head>
+<body>
+
+<div id="authorization_box">
+    <ul>
+        <li><a href="{% url 'sts:index' %}">压力测试系统</a></li>
+        <br />
+        <li><a href="{% url 'cis:index' %}" name="from_index" onclick="ClickCIS()">持续集成系统</a></li>
+    </ul>
+</div>
+
+{#<button onclick="ClickCIS()">click me</button>#}
+
+</body>
+</html>

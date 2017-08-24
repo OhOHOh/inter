@@ -173,10 +173,8 @@ def tryConnect(request):
             print('connect fail')
             return HttpResponse('0')
         else:
-            if r.status_code == requests.codes.ok:
-                print('connect success')
-                return HttpResponse('1')
-    return render(request, 'test1/connect.html')
+            print('connect success')
+            return HttpResponse('1')
 
 
 
@@ -191,3 +189,6 @@ def connectserver(request): #162
     }
     # return HttpResponse(data)
     return render(request, 'test1/wsgi.html', context)
+
+def ping(request):
+    return render(request, 'test1/ping.html')

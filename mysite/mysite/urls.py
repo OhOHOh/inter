@@ -26,4 +26,6 @@ urlpatterns = [
     url(r'^test1/', include('test1.urls')),
 
     url(r'^api/v1/$', test1_views.connectserver),
+# 作为 PING 的一个页面
+    url(r'^api/v1/ping$', test1_views.ping),
 ]

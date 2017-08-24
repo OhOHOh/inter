@@ -4,5 +4,7 @@ from . import views
 app_name = 'sts'
 
 urlpatterns = [
-    url(r'^$', views.indextest, name='index'),
+    url(r'^$', views.index, name='index'),
+    url(r'^branch/$', views.branch, name='branch'),
+    url(r'^connect/$', views.connect, name='connect'),
 ]

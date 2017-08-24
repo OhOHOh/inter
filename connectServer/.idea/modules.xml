@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/connectServer.iml" filepath="$PROJECT_DIR$/.idea/connectServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../TestMaster/.idea/TestMaster.iml" filepath="$PROJECT_DIR$/../TestMaster/.idea/TestMaster.iml" />
     </modules>
   </component>
 </project>

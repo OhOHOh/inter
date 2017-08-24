@@ -31,13 +31,13 @@ def login(request):
                 print('密码成功！')
                 return afterLogin(request)
             else:
-                return render(request, 'login.html', {
+                return render(request, 'login/login.html', {
                     'welcome': "Welcome to test1/views.login",
                     'login': "fail",
                 })
     else:
         uf = UserLoginForm()
-        return render(request, 'login.html', {'uf': uf})
+        return render(request, 'login/login.html')
 
 
 def afterLogin(request):
@@ -47,7 +47,7 @@ def afterLogin(request):
     :return:
     '''
     print('调用了 afterLogin 函数')
-    return render(request, 'afterLogin.html')
+    return render(request, 'login/afterLogin.html')
 
 
 # API 接口函数
