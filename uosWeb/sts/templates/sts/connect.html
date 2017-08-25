@@ -76,33 +76,6 @@
             val = val.replace(del, "");
             x.value = val;
         }
-        <!-- 用于测试连接 TestMaster 的函数 -->
-        function connectTestMaster() {
-            x = document.getElementById("testaddress");
-            var val = x.value;
-
-            // 进行 TestMaster 的连接:
-            $.ajax({
-                //url: "test1/api/connecting/",  //填写是的接口的地址, 在 views 中的函数里测试 connect
-                url: "/test1/api/connecting/",
-                type: 'POST',
-                data: {'ip': val},
-
-                success: function (data) {
-                    if (data === '1') {
-                        // 假设连接成功, 将表单内容提交到指定的视图函数中
-                        document.getElementById('submit').disabled = false;
-                        alert("TestMaster连接成功!");
-                    }
-                    else {
-                        alert("TestMaster连接失败！");
-                    }
-                },
-                error: function () {
-                    alert("TestMaster连接失败!");
-                }
-            });
-        }
     </script>
 
     <style type="text/css">
@@ -130,7 +103,6 @@
     </style>
 </head>
 <body>
-{#    <script src="{% static 'test1/mysite_connect.js' %}"></script>#}
 <!-- 导航栏 -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -147,7 +119,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{% url 'test1:test1index' %}">Back To Index</a></li>
+                <li><a href="{% url 'sts:branch' %}">Back To Branch</a></li>
             </ul>
 {#            <form class="navbar-form navbar-right">#}
 {#                <input type="text" class="form-control" placeholder="Search...">#}
@@ -158,17 +130,13 @@
 
 <!-- 主体 -->
 
-<h1>{{ welcome }}</h1>
-
-<hr/>
-
 {% if error_message %}
     <p><strong>{{ error_message }}</strong></p>
 {% endif %}
 
 
 <!-- 表单！表单信息传递给服务器, 不是TestMaster, 服务器把表单信息传给 TestMaster, TestMaster返回的结果呈现在 Machines 页面中 -->
-<form id="form1" onsubmit="return checkForm(this)" class="form-horizontal" method="post" action="{% url 'test1:test1build' %}"> <!-- onsubmit="return checkForm(this)" -->
+<form id="form1" onsubmit="return checkForm(this)" class="form-horizontal" method="post" action=""> <!-- onsubmit="return checkForm(this)" -->
     {% csrf_token %}
     <!-- TestMaster 地址, type="url" -->
     <div class="form-group">
@@ -211,7 +179,6 @@
     <br/>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="button" class="btn btn-primary" onclick="connectTestMaster();">测试连接</button>
             <button type="submit" class="btn btn-primary" id="submit" disabled="disabled">提交</button>
         </div>
     </div>

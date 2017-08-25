@@ -25,23 +25,15 @@
                 heightStyle: "content"
             });
         });
-        <!--编译按钮的点击响应  当前只是一个单纯的跳转页面, 携带了 branch_name 信息 -->
+<!--编译按钮的点击响应  当前只是一个单纯的跳转页面, 携带了 branch_name 信息 -->
         function click666(id) {
-            $(document).ready(function () {
-{#                alert('编译指令已经发送，请等待编译结果');#}
-                $(id).css('background', 'url("{% static "images/loading.gif" %}") no-repeat');
-                $(id).attr("disabled", true); // 按钮不可点击
-            });
 
-            let branchName = $(id).prev().text(); // 需要把 branchName 送给 TM
+            let branchName = $(id).prev().text(); // get the branchName we clicked, then we send it to connect.html
+            console.log(branchName);              // just a test to make sure that we get branchName
 
-            // 用表单吧！！！先创建好一个隐藏的表单, 再在点击按钮的时候, 把表单中的 input 的值变为 branchName, 再提交！（表单中只有一个input, 并且 action 指向 views.connect）
-            $.ajax({
-                url: "{% url 'sts:connect' %}",
-                type: 'POST',
-                data: {'name': branchName}
-            });
-
+// 用表单吧！！！先创建好一个隐藏的表单, 再在点击按钮的时候, 把表单中的 input 的值变为 branchName, 再提交！（表单中只有一个input, 并且 action 指向 views.connect）
+            $('#form-input').text(branchName);    // prepare form input's value
+            document.getElementById('form-display-none').submit();
             {% comment %}$.ajax({
                 url: "/test1/api/makecompileresult/",     // TM 那边的 API 接口
                 async: true,                           // 同步AJAX，等待 TM 返回 编译的结果
@@ -75,7 +67,7 @@
 
             }){% endcomment %}
         }
-        <!-- 开始 按钮的点击响应 -->
+<!-- 开始 按钮的点击响应 -->
         function click667(id) {
             $(document).ready(function () {
                 $(id).css('background', 'url("{% static "images/loading.gif" %}") no-repeat')
@@ -127,8 +119,6 @@
 </head>
 <body> <!-- onload="getDataFromTM(id='table1')" -->
 
-{#<script src="{% static 'test1/mysite_buildbranch.js' %}"></script>#}
-
 <!-- 导航栏 -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -155,65 +145,56 @@
 
 <!-- 主体 -->
 <div id="accordion">
-    <h3><span id="Master">Master</span>
-        <button onclick="click666(this)" class="button_compile"></button>
-        <button onclick="click667(this)" class="button_start"></button>
-        <span>{{ set }}</span>
-    </h3>
-    <div><!-- accordion 使用 -->
-        <div class="col-sm-12 col-md-12 main">
-            <div class="table-responsive">
-                <table class="table table-hover" id="table1">
-                    <thead> <!-- 表格的表头 -->
-                    <tr>
-                        <th>编译次数</th>
-                        <th>Last Build</th>
-                        <th>运行次数</th>
-                        <th>Last Run</th>
-                    </tr>
-                    </thead> <!-- 表格的内容 -->
 
-                    <tbody>
-                    <!-- 从 TestMaster 那边传递数据过来 -->
-                    </tbody>
-                </table>
+    {% for branchInfo in branchfromTM %}
+        <h3>
+            <span id="branchName">{{ branchInfo.branchName }}</span>
+            <button onclick="click666(this)" class="button_compile"></button>
+            <button onclick="click667(this)" class="button_start"></button>
+            <span>{{ set }}</span>
+            <span id="compileresult"></span>
+        </h3>
+        <div><!-- start accordion -->
+            <div class="col-sm-12 col-md-12 main">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="table1">
+                        <thead> <!-- table head -->
+                        <tr>
+                            <th>编译次数</th>
+                            <th>Last Build</th>
+                            <th>运行次数</th>
+                            <th>Last Run</th>
+                        </tr>
+                        </thead>
+                        <tbody><!-- table content -->
+                        <!-- branch info from TestMaster -->
+                        <td>{{ branchInfo.compileTimes }}</td>
+                        <td>{{ branchInfo.lastCompile }}</td>
+                        <td>{{ branchInfo.runTimes }}</td>
+                        <td>{{ branchInfo.lastRun }}</td>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-
-    <h3><span id="Develop">Develop</span>
-        <button onclick="click666(this)" class="button_compile"></button>
-        <button onclick="click667(this)" class="button_start"></button>
-        <span>{{ set }}</span>
-    </h3>
-    <div><!-- accordion 使用 -->
-        <div class="col-sm-12 col-md-12 main">
-            <div class="table-responsive">
-                <table class="table table-hover" id="table1">
-                    <thead> <!-- 表格的表头 -->
-                    <tr>
-                        <th>编译次数</th>
-                        <th>Last Build</th>
-                        <th>运行次数</th>
-                        <th>Last Run</th>
-                    </tr>
-                    </thead> <!-- 表格的内容 -->
-
-                    <tbody>
-                    <!-- 从 TestMaster 那边传递数据过来 -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+    {% endfor %}
 
 </div>
 
 <br/>
 <br/>
-<br/>
 
 <h3 style="background-color: #2aabd2" class="testparent">fdsafdsaf</h3>
+
+<div id="hidden" style="display: none">
+    <form action="{% url 'sts:connect' %}" method="post" id="form-display-none">    <!-- action to connect.html, include branchName -->
+        {% csrf_token %}
+        <input type="text" id="form-input" name="branchName" >
+        <button type="submit" id="form-button-submit" >submit</button>
+    </form>
+</div>
+
+
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{% static 'js/bootstrap.min.js' %}"></script>

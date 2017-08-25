@@ -166,7 +166,9 @@ def tryConnect(request):
     #         return HttpResponse('1')
     if request.method == 'POST':  # 测试地址里填写的是 IP + port
         ip = request.POST.get('ip')
-        url = 'http://' + ip
+        if ip[0] != 'h':
+            ip = 'http://' + ip
+        url = ip
         try:
             r = requests.get(url)
         except:
@@ -192,3 +194,33 @@ def connectserver(request): #162
 
 def ping(request):
     return render(request, 'test1/ping.html')
+
+@csrf_exempt
+def tryPing(request):
+    if request.method == 'POST':  # 测试地址里填写的是 IP + port
+        ip = request.POST.get('ip')
+        if ip[0] != 'h':
+            ip = 'http://' + ip
+        url = ip
+        try:
+            r = requests.get(url)
+            print(r.headers)
+            print(r.status_code)
+            print(r.text)
+            print(r.request)
+        except:
+            context = {
+                'result': '0',
+            }
+            print('connect fail')
+            return HttpResponse('0')
+        else:
+            context = {
+                'result': '1',
+                'headers': r.headers,
+                'status_code': r.status_code,
+                'content': r.text,
+                'request': r.request,
+            }
+            print('connect success')
+            return HttpResponse('1')

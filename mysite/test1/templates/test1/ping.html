@@ -39,7 +39,7 @@
             console.log(val);
 
             $.ajax({
-                url: "{% url 'test1:test1tryconnect' %}",
+                url: "{% url 'test1:test1pingconnect' %}",
                 type: "POST",
                 data: {'ip': val},
 
@@ -65,7 +65,7 @@
 </head>
 <body>
 
-<form class="form-signin" method="post" action="{% url 'test1:test1tryconnect' %}" onsubmit="return connect();">
+<form class="form-signin" method="post" action="{% url 'test1:test1pingconnect' %}" onsubmit="return connect();">
     {% csrf_token %}
     <h2 class="form-signin-heading">请输入 IP+PORT</h2>
     <!-- TMurl -->
@@ -76,6 +76,9 @@
     <button class="btn btn-lg btn-primary btn-block" type="submit">Next</button>
 </form>
 
+{% if result == '1' %}
+    <>
+{% endif %}
 
 </body>
 </html>

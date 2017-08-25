@@ -1,9 +1,15 @@
 import telnetlib, requests
 
+
+url = 'http://10.0.169.155:8003'
+if url[-1] != '/':
+    url = url + '/'
+print(url)
+
 print('start')
 
 try:
-    r = requests.get('http://10.0.169.155:8003/')
+    r = requests.get('http://10.0.169.155:8003')
 except:
     print('连接失败')
 else:

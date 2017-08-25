@@ -27,22 +27,23 @@ def index(request):
 def branch(request):
     if request.method == 'POST':
         ip = request.POST['TMurl']
-        url = 'http://' + ip + ''   # ip 后面加上去的就是指 TM 的 api 接口
-        r = requests.get(url)       # 这里不需要再 try 了, 因为之前已经做过了 PING 测试
-        if r.status_code == requests.codes.ok:
-            print(requests.codes.ok)
+        if ip[-1] != '/':                                 # make sure ip end with '/'
+            ip = ip + '/'
+        url = 'http://' + ip + 'api/v1/makebranchjson/'   # url is TestMaster's API, we can get branch info from the url.
+        r = requests.get(url)                    # no more 'try', because we do it before in function tryConnect
+        if r.status_code == requests.codes.ok:   # requests.codes.ok = 200
             data = r.json()
             print(data)
-            return render(request, 'sts/branch.html', {'data': data})
-        else:  # 以防万一出现 404, 意味着 TM 服务器没有对应的网址, 即 TM 后台没有对应的接口, 一种可能是 ip 后面的东西写错, 另一种可能是 TM 后台的 API 地址写错
+            context = {
+                'branchfromTM': data,
+            }
+            return render(request, 'sts/branch.html', context)
+        else:  # in case of 404, 404 means TM server does not have the url, but we can access the ip+port
             context = {
                 'error_message': '访问地址有误，请检查 TestMaster 后台对应的api接口地址和本页面对应的访问地址！',
-                'url': url
+                'ip': ip,
             }
             return render(request, 'sts/fail.html', context)
-
-
-
     return render(request, 'sts/branch.html')
 
 
@@ -50,11 +51,12 @@ def branch(request):
 def connect(request):
     if request.method == "POST":
         print('connect函数')
-        name = request.POST['name']
+        name = request.POST['branchName']
+        print(name)
 
         return render(request, 'sts/connect.html', {
-            'name': name
-        }, context_instance=RequestContext(request))
+            'branchName': name
+        })
 
     return HttpResponse('views.connect')
 
@@ -64,7 +66,7 @@ def connect(request):
 def tryConnect(request):
     """
     相当于 PING 测试
-    通过访问 url: /sts/api/tryconnect 来获取函数的执行, 测试地址里填写的是 IP+PORT
+    通过访问 url: /sts/api/tryconnect 来获取函数的执行, 测试地址里填写的是 IP+PORT, 对于最后有没有加上 '/', 对测试没有影响
     在页面 connect.html 中的 connectTestMaster 函数中引用的 API
     :return:
     """
@@ -82,6 +84,7 @@ def tryConnect(request):
     if request.method == 'POST':  # 测试地址里填写的是 IP + port, 而这个函数我们需要添加 'http://' 的头
         ip = request.POST.get('ip')
         url = 'http://' + ip
+        print(url)
         try:
             r = requests.get(url)
         except:

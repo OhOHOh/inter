@@ -19,6 +19,7 @@
       <w>ondragstart</w>
       <w>ondrop</w>
       <w>onload</w>
+      <w>pingconnect</w>
       <w>rememberme</w>
       <w>signin</w>
       <w>statusa</w>
@@ -29,6 +30,7 @@
       <w>testpatch</w>
       <w>testset</w>
       <w>testsetinput</w>
+      <w>tryconnect</w>
       <w>vivamus</w>
     </words>
   </dictionary>

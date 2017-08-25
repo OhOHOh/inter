@@ -13,6 +13,7 @@ urlpatterns = [
     # API 接口的 url
     url(r'^api/login/$', views.apiLogin),
     url(r'^api/connecting/$', views.tryConnect, name='test1tryconnect'),
+    url(r'^api/pingconnect/$', views.tryPing, name='test1pingconnect'),
 
 
     # test API ,用于生成 JSON 数据做一个测试，模拟 TestMaster 返回的 branch 的信息

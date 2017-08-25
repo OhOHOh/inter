@@ -71,7 +71,7 @@
     <form class="form-signin" method="post" action="{% url 'sts:branch' %}" onsubmit="return connectTM();">
         {% csrf_token %}
         <h2 class="form-signin-heading">请配置TestMaster的信息</h2>
-        <!-- 测试的 IP+PORT -->
+        <!-- IP+PORT -->
         <label for="TMurl" class="sr-only">url</label>
         <div class="input-group">
             <span class="input-group-addon" id="prefix">http://</span>

@@ -22,12 +22,12 @@ urlpatterns = [
 
     # url(r'^cis/', include('cis.urls')),
 
-    url(r'^$', login_views.login, name='login'),           # 登录界面
-    url(r'^sts/', include('sts.urls')),                    # 压力测试系统
-    url(r'^cis/', include('cis.urls')),                    # 持续集成系统
+    url(r'^$', login_views.login, name='login'),           # login UI
+    url(r'^sts/', include('sts.urls')),                    # Stress Test System
+    url(r'^cis/', include('cis.urls')),                    # Continuous Integration System
 
 
 
-    # 所有的接口 api
+    # api used by self, outside web should not visit
     url(r'^api/v1/login/$', login_views.apiLogin, name='apilogin'),
 ]
