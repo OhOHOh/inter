@@ -58,7 +58,7 @@ def makeMachineJson(request):
         {
             'id' : 1001,
             'test': 10001,
-            'status': 0,
+            'status': 1,
             'time': 100,
             'distance': 5000,
         },
@@ -68,11 +68,12 @@ def makeMachineJson(request):
             'status': 0,
             'time': 102,
             'distance': 5002,
+            'error': "lots of words",
         },
         {
             'id': 1003,
             'test': 10003,
-            'status': 0,
+            'status': 1,
             'time': 103,
             'distance': 5003,
         }

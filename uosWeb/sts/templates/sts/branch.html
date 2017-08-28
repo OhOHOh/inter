@@ -31,9 +31,10 @@
             let branchName = $(id).prev().text(); // get the branchName we clicked, then we send it to connect.html
             console.log(branchName);              // just a test to make sure that we get branchName
 
-// 用表单吧！！！先创建好一个隐藏的表单, 再在点击按钮的时候, 把表单中的 input 的值变为 branchName, 再提交！（表单中只有一个input, 并且 action 指向 views.connect）
-            $('#form-input').text(branchName);    // prepare form input's value
+    // 用表单吧！！！先创建好一个隐藏的表单, 再在点击按钮的时候, 把表单中的 input 的值变为 branchName, 再提交！（表单中只有一个input, 并且 action 指向 views.connect）
+            $('#form-input').val(branchName);    // prepare form input's value
             document.getElementById('form-display-none').submit();
+
             {% comment %}$.ajax({
                 url: "/test1/api/makecompileresult/",     // TM 那边的 API 接口
                 async: true,                           // 同步AJAX，等待 TM 返回 编译的结果
@@ -137,7 +138,7 @@
             <ul class="nav navbar-nav navbar-right">
 {#                <li><a href="{% url 'test1:test1connect' %}">Back To Connect</a></li>#}
 {#                <li><a href="{% url 'test1:test1index' %}">Back To Index</a></li>#}
-                <li><a class="navbar-brand" onclick="addBranch();" href="#">新增Branch</a></li>
+{#                <li><a class="navbar-brand" onclick="addBranch();" href="#">新增Branch</a></li>#}
             </ul>
         </div>
     </div>
@@ -150,7 +151,7 @@
         <h3>
             <span id="branchName">{{ branchInfo.branchName }}</span>
             <button onclick="click666(this)" class="button_compile"></button>
-            <button onclick="click667(this)" class="button_start"></button>
+{#            <button onclick="click667(this)" class="button_start"></button>#}
             <span>{{ set }}</span>
             <span id="compileresult"></span>
         </h3>
@@ -184,12 +185,12 @@
 <br/>
 <br/>
 
-<h3 style="background-color: #2aabd2" class="testparent">fdsafdsaf</h3>
 
 <div id="hidden" style="display: none">
     <form action="{% url 'sts:connect' %}" method="post" id="form-display-none">    <!-- action to connect.html, include branchName -->
         {% csrf_token %}
         <input type="text" id="form-input" name="branchName" >
+        <input type="text" id="form-ip" name="TMip" value="{{ TMip }}">
         <button type="submit" id="form-button-submit" >submit</button>
     </form>
 </div>

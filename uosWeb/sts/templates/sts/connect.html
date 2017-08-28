@@ -31,15 +31,15 @@
         <!-- 检查表单函数 -->
         function checkForm(obj) {
             // {#  alert("start"); #}
-            if (obj.testaddress233.value === '') {
+            if (obj.address233.value === '') {
                 alert("请输入测试版本");
                 return false;
             }
-            if (obj.testset233.value === '') {
+            if (obj.set233.value === '') {
                 alert("请选择测试集");
                 return false;
             }
-            if (obj.testpatch233.value === '') {
+            if (obj.patch233.value === '') {
                 alert("请输入测试patch");
                 return false;
             }
@@ -60,7 +60,7 @@
             var data = ev.dataTransfer.getData("Text");
             ev.target.appendChild(document.getElementById(data));
 
-            x = document.getElementById("testsetinput");
+            x = document.getElementById("case");
             x.value += document.getElementById(data).textContent;
             x.value += ", ";
         }
@@ -69,7 +69,7 @@
             var data = ev.dataTransfer.getData("Text");
             ev.target.appendChild(document.getElementById(data));
 
-            x = document.getElementById("testsetinput");
+            x = document.getElementById("case");
             del = document.getElementById(data).textContent + ", ";
 
             var val = x.value;
@@ -80,7 +80,7 @@
 
     <style type="text/css">
         body {
-            padding-top: 50px;
+            padding-top: 100px;
             padding-bottom: 50px;
         }
 
@@ -119,11 +119,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{% url 'sts:branch' %}">Back To Branch</a></li>
+{#                <li><a href="{% url 'sts:branch' %}">Back To Branch</a></li>#}
             </ul>
-{#            <form class="navbar-form navbar-right">#}
-{#                <input type="text" class="form-control" placeholder="Search...">#}
-{#            </form>#}
         </div>
     </div>
 </nav>
@@ -136,29 +133,30 @@
 
 
 <!-- 表单！表单信息传递给服务器, 不是TestMaster, 服务器把表单信息传给 TestMaster, TestMaster返回的结果呈现在 Machines 页面中 -->
-<form id="form1" onsubmit="return checkForm(this)" class="form-horizontal" method="post" action=""> <!-- onsubmit="return checkForm(this)" -->
+<form id="form1" onsubmit="return checkForm(this)" class="form-horizontal" method="post" action="{% url 'sts:machine' %}"> <!-- onsubmit="return checkForm(this)" -->
     {% csrf_token %}
     <!-- TestMaster 地址, type="url" -->
     <div class="form-group">
-        <label for="testaddress" class="col-sm-2 control-label">测试地址</label>
+        <label for="address" class="col-sm-2 control-label">TM地址</label>
         <div class="col-sm-9">
-            <input type="text" class="form-control" id="testaddress" name="testaddress233" placeholder="input TestMaster IP:PORT" required>
+            <!-- value 中放的就是 TM 中返回 Machines 信息的 api 地址 -->
+            <input type="text" class="form-control" id="address" name="address233" placeholder="input TestMaster IP:PORT" value="{{ TMip }}api/v1/makemachinejson/" required>
         </div>
     </div>
 
     <!-- 测试集 -->
     <div class="form-group">
-        <label for="testset" class="col-sm-2 control-label">测试集</label>
+        <label for="case" class="col-sm-2 control-label">测试集</label>
         <div class="col-sm-9">
-            <input type="text" class="form-control" id="testsetinput" name="testset233" placeholder="choose test set"
+            <input type="text" class="form-control" id="case" name="case233" placeholder="choose test case"
                    readonly="readonly">
 
             <br/>
             <div id="div1" ondrop="dropdiv1(event)" ondragover="allowDrop(event)" class="form-control">
-                {% for testsetitem in testset_list %}
-                    <p style="width: 100px; white-space: nowrap" draggable="true" ondragstart="drag(event)" id="DBtest{{ testsetitem.id }}">{{ testsetitem.setName }}</p>
+                {% for testcaseitem in testcase_list %}
+                    <p style="width: 100px; white-space: nowrap" draggable="true" ondragstart="drag(event)" id="DBtest{{ testcaseitem.id }}">{{ testcaseitem.caseName }}</p>
                 {% endfor %}
-                <p style="width: 100px; white-space: normal" draggable="true" ondragstart="drag(event)" id="DBtest10">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaflajgoiae;bnha;hjg;j;f;jjtgafakdjhgkiafdlkbvmdakbjgiarmklgjfoidbglmblfgs;kgggggggggggggggggggggggggggggggggggggggggggggghiosn;lkvnfsk;dhbiorsmbko;shgdiobsklhfdhgvfanhrfjlagfiubvlbv</p>
+{#                <p style="width: 100px; white-space: normal" draggable="true" ondragstart="drag(event)" id="DBtest10">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaflajgoiae;bnha;hjg;j;f;jjtgafakdjhgkiafdlkbvmdakbjgiarmklgjfoidbglmblfgs;kgggggggggggggggggggggggggggggggggggggggggggggghiosn;lkvnfsk;dhbiorsmbko;shgdiobsklhfdhgvfanhrfjlagfiubvlbv</p>#}
             </div>
 
             <!-- 把div2中的值显示在上面的input中 -->
@@ -170,16 +168,20 @@
 
     <!-- 测试patch -->
     <div class="form-group">
-        <label for="testpatch" class="col-sm-2 control-label">测试patch</label>
+        <label for="patch" class="col-sm-2 control-label">测试patch</label>
         <div class="col-sm-9">
-            <input type="text" class="form-control" id="testpatch" name="testpatch233" placeholder="input test patch" required>
+            <input type="text" class="form-control" id="patch" name="patch2233" placeholder="input test patch" required>
         </div>
+    </div>
+
+    <div style="display: none">
+        <input type="text" id="branchName" name="branchName" value="{{ branchName }}" >
     </div>
     {#    提交按钮#}
     <br/>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary" id="submit" disabled="disabled">提交</button>
+            <button type="submit" class="btn btn-primary" id="submit" >提交</button>
         </div>
     </div>
 </form>

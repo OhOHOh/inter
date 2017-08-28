@@ -17,3 +17,7 @@ class BranchInfo(models.Model):
         return self.branch_name
 
 # auto_now=True
+
+# 存放的是 Testcase 的名字, 在 connect.html 中使用
+class Testcase(models.Model):
+    caseName = models.CharField(max_length=200)

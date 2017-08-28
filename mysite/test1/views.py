@@ -1,6 +1,6 @@
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 import requests
@@ -204,10 +204,6 @@ def tryPing(request):
         url = ip
         try:
             r = requests.get(url)
-            print(r.headers)
-            print(r.status_code)
-            print(r.text)
-            print(r.request)
         except:
             context = {
                 'result': '0',
@@ -222,5 +218,9 @@ def tryPing(request):
                 'content': r.text,
                 'request': r.request,
             }
+            print('headers: ', r.headers)
+            print('status_code: ', r.status_code)
+            print('content: ', r.text)
+            print('protocol：', r.request)
             print('connect success')
             return HttpResponse('1')

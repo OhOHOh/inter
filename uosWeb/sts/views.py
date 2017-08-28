@@ -5,6 +5,7 @@ from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 import requests
 
+from .models import Testcase
 # Create your views here.
 
 
@@ -30,18 +31,20 @@ def branch(request):
         if ip[-1] != '/':                                 # make sure ip end with '/'
             ip = ip + '/'
         url = 'http://' + ip + 'api/v1/makebranchjson/'   # url is TestMaster's API, we can get branch info from the url.
+        url2 = 'http://' + ip
         r = requests.get(url)                    # no more 'try', because we do it before in function tryConnect
         if r.status_code == requests.codes.ok:   # requests.codes.ok = 200
             data = r.json()
             print(data)
             context = {
                 'branchfromTM': data,
+                'TMip': url2,                      # 传递给 connect.html
             }
             return render(request, 'sts/branch.html', context)
         else:  # in case of 404, 404 means TM server does not have the url, but we can access the ip+port
             context = {
                 'error_message': '访问地址有误，请检查 TestMaster 后台对应的api接口地址和本页面对应的访问地址！',
-                'ip': ip,
+                'ip': url,
             }
             return render(request, 'sts/fail.html', context)
     return render(request, 'sts/branch.html')
@@ -52,14 +55,42 @@ def connect(request):
     if request.method == "POST":
         print('connect函数')
         name = request.POST['branchName']
-        print(name)
+        ip = request.POST['TMip']
+        print('从branch.html中传过来的branchName: ', name)
+        print('从branch.html中传过来的TMip: ', ip)
+
+        testcase_list = Testcase.objects.order_by('caseName')
 
         return render(request, 'sts/connect.html', {
-            'branchName': name
+            'branchName': name,
+            'TMip': ip,
+            'testcase_list': testcase_list,
         })
 
     return HttpResponse('views.connect')
 
+
+def machine(request):
+    if request.method == 'POST':
+        url = request.POST['address233']
+        case = request.POST['case233']
+        patch = request.POST['patch2233']
+        branchName = request.POST['branchName']
+        print(url)
+        print(case)
+        print(patch)
+        print(branchName)
+
+        r = requests.get(url)
+        print(r.json())
+
+        context = {
+            'machines': r.json(),
+        }
+        return render(request, 'sts/machine.html', context)
+
+
+    return render(request, 'sts/machine.html')
 
 
 @csrf_exempt

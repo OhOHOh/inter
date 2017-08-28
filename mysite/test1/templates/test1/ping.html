@@ -60,6 +60,41 @@
 
             return false;
         }
+
+        function connect2() {
+            x = document.getElementById('TMurl');
+            var val = x.value;
+            // var url = 'http://' + val;
+            console.log(val);
+
+            $.ajax({
+                url: "{% url 'test1:test1pingconnect' %}",
+                type: "POST",
+                data: {'ip': val},
+
+                success: function (data) {
+                    dataObject = JSON.parse(data);
+                    console.log(dataObject);
+                    console.log(data);
+                    console.log({{ context }});
+
+                    if (dataObject['result'] === '1') {
+                        // 假设连接成功, 将表单内容提交到指定的视图函数中
+                        alert("TestMaster连接成功!");
+                    }
+                    else {
+                        alert("TestMaster连接失败！");
+                    }
+                },
+                error: function () {
+                    alert("与Django后台连接失败!需要重新尝试！");
+                }
+
+            });
+
+            return false;
+        }
+
     </script>
 
 </head>
@@ -71,14 +106,13 @@
     <!-- TMurl -->
     <label for="TMurl" class="sr-only">url</label>
     <input type="text" id="TMurl" name="TMurl" class="form-control" placeholder="please input IP+POST" required autofocus>
-
-    <br/>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Next</button>
+{#    <br />#}
+{#    <textarea class="form-signin" id="showcontent" style="width: 100%; height: 300px;"></textarea>#}
+    <br/><br />
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Check</button>
 </form>
 
-{% if result == '1' %}
-    <>
-{% endif %}
+
 
 </body>
 </html>
