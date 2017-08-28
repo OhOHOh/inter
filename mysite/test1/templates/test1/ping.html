@@ -44,12 +44,24 @@
                 data: {'ip': val},
 
                 success: function (data) {
-                    if (data === '1') {
-                        // 假设连接成功, 将表单内容提交到指定的视图函数中
-                        alert("TestMaster连接成功!");
+                    dataObject = JSON.parse(data);
+                    console.log(dataObject.result);
+                    console.log(dataObject["result"]);
+                    console.log(dataObject['error']);
+                    if (dataObject['result'] === '0') {
+                        alert("TestMaster连接失败!");
                     }
                     else {
-                        alert("TestMaster连接失败！");
+                        console.log('连接成功');
+                        console.log(dataObject['status_code']);
+                        console.log(dataObject['headers']);
+                        console.log(dataObject['protocol']);
+                        $('#showstatus_code').val(dataObject['status_code']);
+                        $('#showheaders').val(dataObject['headers']);
+                        $('#showprotocol').val(dataObject['protocol']);
+                        $('#showcontent').val(dataObject['content']);
+
+                        alert("TestMaster连接成功！");
                     }
                 },
                 error: function () {
@@ -107,7 +119,10 @@
     <label for="TMurl" class="sr-only">url</label>
     <input type="text" id="TMurl" name="TMurl" class="form-control" placeholder="please input IP+POST" required autofocus>
 {#    <br />#}
-{#    <textarea class="form-signin" id="showcontent" style="width: 100%; height: 300px;"></textarea>#}
+    <input class="form-control" placeholder="status_code" id="showstatus_code" readonly />
+    <input class="form-control" placeholder="headers" id="showheaders" />
+    <input class="form-control" placeholder="protocol" id="showprotocol" readonly />
+    <textarea class="form-signin" id="showcontent" style="width: 100%; height: 300px;"></textarea>
     <br/><br />
     <button class="btn btn-lg btn-primary btn-block" type="submit">Check</button>
 </form>

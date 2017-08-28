@@ -207,20 +207,26 @@ def tryPing(request):
         except:
             context = {
                 'result': '0',
+                'error': "just a test",
             }
+            # response = HttpResponse()
+            # response['result'] = '0'
+            # response['error'] = "just a test"
             print('connect fail')
-            return HttpResponse('0')
+            # return HttpResponse('0')
+            return HttpResponse(json.dumps(context))
         else:
-            context = {
+            context1 = {
                 'result': '1',
-                'headers': r.headers,
+                'headers': str(r.headers),
                 'status_code': r.status_code,
                 'content': r.text,
-                'request': r.request,
+                'protocol': str(r.request),
             }
             print('headers: ', r.headers)
             print('status_code: ', r.status_code)
             print('content: ', r.text)
             print('protocol：', r.request)
             print('connect success')
-            return HttpResponse('1')
+            # return HttpResponse('1')
+            return HttpResponse(json.dumps(context1))

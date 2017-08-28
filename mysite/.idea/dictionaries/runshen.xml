@@ -21,6 +21,10 @@
       <w>onload</w>
       <w>pingconnect</w>
       <w>rememberme</w>
+      <w>showcontent</w>
+      <w>showheaders</w>
+      <w>showprotocol</w>
+      <w>showstatus</w>
       <w>signin</w>
       <w>statusa</w>
       <w>telnetlib</w>
