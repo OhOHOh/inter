@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from login import views as login_views
+from sts import views as sts_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,10 +25,10 @@ urlpatterns = [
 
     url(r'^$', login_views.login, name='login'),           # login UI
     url(r'^sts/', include('sts.urls')),                    # Stress Test System
-    url(r'^cis/', include('cis.urls')),                    # Continuous Integration System
+    url(r'^cis/', include('cis.urls')),                    # Continuous Integration Syste
 
+    url(r'^api/ping/$', sts_views.ping),                    # 测试人员 测试 ip+port 用的
 
-
-    # api used by self, outside web should not visit
+    # api used by self_webpage, outside web should not visit
     url(r'^api/v1/login/$', login_views.apiLogin, name='apilogin'),
 ]

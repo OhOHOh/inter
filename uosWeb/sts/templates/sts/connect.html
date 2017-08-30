@@ -32,7 +32,7 @@
         function checkForm(obj) {
             // {#  alert("start"); #}
             if (obj.address233.value === '') {
-                alert("请输入测试版本");
+                alert("请输入TM中对应的api地址");
                 return false;
             }
             if (obj.set233.value === '') {
@@ -140,7 +140,7 @@
         <label for="address" class="col-sm-2 control-label">TM地址</label>
         <div class="col-sm-9">
             <!-- value 中放的就是 TM 中返回 Machines 信息的 api 地址 -->
-            <input type="text" class="form-control" id="address" name="address233" placeholder="input TestMaster IP:PORT" value="{{ TMip }}api/v1/makemachinejson/" required>
+            <input type="text" class="form-control" id="address" name="address233" placeholder="input TestMaster IP:PORT" value="{{ TMip }}" required>
         </div>
     </div>
 

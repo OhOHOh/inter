@@ -29,3 +29,9 @@ if site.find('GET') != -1:
     print('find!')
 if 'GET' in site:
     print('find2!')
+
+x = 50
+def fun():
+    global x
+    print(x)
+fun()

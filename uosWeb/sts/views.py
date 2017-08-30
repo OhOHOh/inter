@@ -1,9 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
-import requests
+import requests,json
 
 from .models import Testcase
 # Create your views here.
@@ -63,7 +62,7 @@ def connect(request):
 
         return render(request, 'sts/connect.html', {
             'branchName': name,
-            'TMip': ip,
+            'TMip': ip+'api/v1/makemachinejson/',
             'testcase_list': testcase_list,
         })
 
@@ -92,11 +91,14 @@ def machine(request):
 
     return render(request, 'sts/machine.html')
 
+def ping(request):
+    return render(request, 'sts/ping.html')
+
 
 @csrf_exempt
 def tryConnect(request):
     """
-    相当于 PING 测试
+    相当于 PING 测试, 用于最初进入 sts 的时候配置 TM 的 url , 用到
     通过访问 url: /sts/api/tryconnect 来获取函数的执行, 测试地址里填写的是 IP+PORT, 对于最后有没有加上 '/', 对测试没有影响
     在页面 connect.html 中的 connectTestMaster 函数中引用的 API
     :return:
@@ -124,3 +126,40 @@ def tryConnect(request):
         else:
             print('connect success')
             return HttpResponse('1')
+
+
+@csrf_exempt
+def tryPing(request):
+    if request.method == 'POST':  # 测试地址里填写的是 IP + port
+        ip = request.POST.get('ip')
+        if ip[0] != 'h':
+            ip = 'http://' + ip
+        url = ip
+        try:
+            r = requests.get(url)
+        except:
+            context = {
+                'result': '0',
+                'error': "just a test",
+            }
+            # response = HttpResponse()
+            # response['result'] = '0'
+            # response['error'] = "just a test"
+            print('connect fail')
+            # return HttpResponse('0')
+            return HttpResponse(json.dumps(context))
+        else:
+            context1 = {
+                'result': '1',
+                'headers': str(r.headers),
+                'status_code': r.status_code,
+                'content': r.text,
+                'protocol': str(r.request),
+            }
+            print('headers: ', r.headers)
+            print('status_code: ', r.status_code)
+            print('content: ', r.text)
+            print('protocol：', r.request)
+            print('connect success')
+            # return HttpResponse('1')
+            return HttpResponse(json.dumps(context1))
