@@ -27,8 +27,8 @@ urlpatterns = [
     url(r'^sts/', include('sts.urls')),                    # Stress Test System
     url(r'^cis/', include('cis.urls')),                    # Continuous Integration Syste
 
-    url(r'^api/ping/$', sts_views.ping),                    # 测试人员 测试 ip+port 用的
+    url(r'^api/ping/$', sts_views.ping),                   # 测试人员 测试 ip+port 用的
 
-    # api used by self_webpage, outside web should not visit
+    # api used by login.html, other web should not visit
     url(r'^api/v1/login/$', login_views.apiLogin, name='apilogin'),
 ]

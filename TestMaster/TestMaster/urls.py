@@ -22,7 +22,8 @@ urlpatterns = [
 
     url(r'^api/v1/hello/$', api_views.hello),
     # test API ,用于生成 JSON 数据做一个测试，模拟 TestMaster 返回的 branch 的信息
-    url(r'^api/v1/makebranchjson/$', api_views.makeBranchJson),
-    url(r'^api/v1/makemachinejson/$', api_views.makeMachineJson),
+    url(r'^api/v1/branches/$', api_views.makeBranchJson),               # api/v1/branches
+    url(r'^api/v1/machines/$', api_views.makeMachineJson),              # api/v1/machines
     url(r'^api/v1/makecompileresult/$', api_views.makeCompileResult),
+    url(r'^api/v1/testcases/$', api_views.makeCase),                    # api/v1/testcases
 ]

@@ -112,12 +112,17 @@
             <ul class="nav navbar-nav navbar-right">
 {#                <li><a href="{% url 'test1:test1build' %}">BackTo Branch</a></li>#}
 {#                <li><a href="{% url 'test1:test1index' %}">Back To Index</a></li>#}
+                <li><a class="navbar-brand" href="{% url 'sts:branch' %}">BranchInfo</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
 <!--主体-->
+
+{% if machines.error %}
+    <h1>{{ machines.error }}</h1>
+{% endif %}
 
 <div class="container-fluid">
 
@@ -129,34 +134,45 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th>Machine</th>
-                        <th>运行状态</th>
-                        <th>测试编号</th>
-                        <th>运行时间</th>
-                        <th>运行距离</th>
+                        <th>Machine Name</th>
+                        <th>Address</th>
+                        <th>RequestID</th>
+                        <th>Status</th>
                     </tr>
                     </thead>
                     <tbody> <!-- 表格的内容 -->
 
+
+
                     {% for machine in machines %}
-                        {% if machine.status == 1 %}
-                            <tr class="success">
-                                <td>{{ machine.id }}</td>
-                                <td>{{ machine.status }}</td>
-                                <td>{{ machine.test }}</td>
-                                <td>{{ machine.time }}</td>
-                                <td>{{ machine.distance }}</td>
-                            </tr>
-                        {% else %}
-                            <tr class="danger">
-                                <td>{{ machine.id }}</td>
-                                <td>{{ machine.status }}</td>
-                                <td>{{ machine.test }}</td>
-                                <td>{{ machine.time }}</td>
-                                <td>{{ machine.distance }}</td>
-                            </tr>
-                        {% endif %}
+                        <tr>
+                            <td>{{ machine.name }}</td>
+                            <td>{{ machine.address }}</td>
+                            <td>{{ machine.requestid }}</td>
+                            <td>{{ machine.status }}</td>
+                        </tr>
                     {% endfor %}
+
+
+{#                    {% for machine in machines %}#}
+{#                        {% if machine.status == 1 %}#}
+{#                            <tr class="success">#}
+{#                                <td>{{ machine.id }}</td>#}
+{#                                <td>{{ machine.status }}</td>#}
+{#                                <td>{{ machine.test }}</td>#}
+{#                                <td>{{ machine.time }}</td>#}
+{#                                <td>{{ machine.distance }}</td>#}
+{#                            </tr>#}
+{#                        {% else %}#}
+{#                            <tr class="danger">#}
+{#                                <td>{{ machine.id }}</td>#}
+{#                                <td>{{ machine.status }}</td>#}
+{#                                <td>{{ machine.test }}</td>#}
+{#                                <td>{{ machine.time }}</td>#}
+{#                                <td>{{ machine.distance }}</td>#}
+{#                            </tr>#}
+{#                        {% endif %}#}
+{#                    {% endfor %}#}
 
                     </tbody>
                 </table>

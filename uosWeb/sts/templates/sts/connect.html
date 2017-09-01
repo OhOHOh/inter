@@ -144,6 +144,14 @@
         </div>
     </div>
 
+    <!-- branchName -->
+    <div class="form-group">
+        <label for="branchName" class="col-sm-2 control-label">BranchName</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="branchName" name="branchname2233" value="{{ branchName }}" readonly="readonly" >
+        </div>
+    </div>
+
     <!-- 测试集 -->
     <div class="form-group">
         <label for="case" class="col-sm-2 control-label">测试集</label>
@@ -153,9 +161,14 @@
 
             <br/>
             <div id="div1" ondrop="dropdiv1(event)" ondragover="allowDrop(event)" class="form-control">
-                {% for testcaseitem in testcase_list %}
+                {% comment %}{% for testcaseitem in testcase_list %}
                     <p style="width: 100px; white-space: nowrap" draggable="true" ondragstart="drag(event)" id="DBtest{{ testcaseitem.id }}">{{ testcaseitem.caseName }}</p>
+                {% endfor %}{% endcomment %}
+
+                {% for testcase in testcase_list %}
+                    <p style="width: 100px; white-space: nowrap" draggable="true" ondragstart="drag(event)" id="fromTM{{ testcase }}">{{ testcase }}</p>
                 {% endfor %}
+
 {#                <p style="width: 100px; white-space: normal" draggable="true" ondragstart="drag(event)" id="DBtest10">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaflajgoiae;bnha;hjg;j;f;jjtgafakdjhgkiafdlkbvmdakbjgiarmklgjfoidbglmblfgs;kgggggggggggggggggggggggggggggggggggggggggggggghiosn;lkvnfsk;dhbiorsmbko;shgdiobsklhfdhgvfanhrfjlagfiubvlbv</p>#}
             </div>
 
@@ -166,17 +179,6 @@
         </div>
     </div>
 
-    <!-- 测试patch -->
-    <div class="form-group">
-        <label for="patch" class="col-sm-2 control-label">测试patch</label>
-        <div class="col-sm-9">
-            <input type="text" class="form-control" id="patch" name="patch2233" placeholder="input test patch" required>
-        </div>
-    </div>
-
-    <div style="display: none">
-        <input type="text" id="branchName" name="branchName" value="{{ branchName }}" >
-    </div>
     {#    提交按钮#}
     <br/>
     <div class="form-group">
